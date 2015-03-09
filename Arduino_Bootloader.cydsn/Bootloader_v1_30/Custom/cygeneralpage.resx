@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="errProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxCommMetadata.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxCommMetadata.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 157</value>
+  </data>
+  <data name="checkBoxCommMetadata.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 17</value>
+  </data>
+  <data name="checkBoxCommMetadata.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="checkBoxCommMetadata.Text" xml:space="preserve">
+    <value>Get metadata</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommMetadata.Name" xml:space="preserve">
+    <value>checkBoxCommMetadata</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommMetadata.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommMetadata.Parent" xml:space="preserve">
+    <value>groupBoxCommands</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommMetadata.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="checkBoxCommStatus.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxCommStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 134</value>
+  </data>
+  <data name="checkBoxCommStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 17</value>
+  </data>
+  <data name="checkBoxCommStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="checkBoxCommStatus.Text" xml:space="preserve">
+    <value>Get application status</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommStatus.Name" xml:space="preserve">
+    <value>checkBoxCommStatus</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommStatus.Parent" xml:space="preserve">
+    <value>groupBoxCommands</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommStatus.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="checkBoxCommSync.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxCommSync.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 111</value>
+  </data>
+  <data name="checkBoxCommSync.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 17</value>
+  </data>
+  <data name="checkBoxCommSync.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="checkBoxCommSync.Text" xml:space="preserve">
+    <value>Sync bootloader</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommSync.Name" xml:space="preserve">
+    <value>checkBoxCommSync</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommSync.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommSync.Parent" xml:space="preserve">
+    <value>groupBoxCommands</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommSync.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="checkBoxCommSend.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxCommSend.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 88</value>
+  </data>
+  <data name="checkBoxCommSend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 17</value>
+  </data>
+  <data name="checkBoxCommSend.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="checkBoxCommSend.Text" xml:space="preserve">
+    <value>Send data</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommSend.Name" xml:space="preserve">
+    <value>checkBoxCommSend</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommSend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommSend.Parent" xml:space="preserve">
+    <value>groupBoxCommands</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommSend.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="checkBoxCommVerify.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxCommVerify.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 65</value>
+  </data>
+  <data name="checkBoxCommVerify.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 17</value>
+  </data>
+  <data name="checkBoxCommVerify.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="checkBoxCommVerify.Text" xml:space="preserve">
+    <value>Verify row</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommVerify.Name" xml:space="preserve">
+    <value>checkBoxCommVerify</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommVerify.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommVerify.Parent" xml:space="preserve">
+    <value>groupBoxCommands</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommVerify.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="checkBoxCommErase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxCommErase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
+  </data>
+  <data name="checkBoxCommErase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 17</value>
+  </data>
+  <data name="checkBoxCommErase.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="checkBoxCommErase.Text" xml:space="preserve">
+    <value>Erase row</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommErase.Name" xml:space="preserve">
+    <value>checkBoxCommErase</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommErase.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommErase.Parent" xml:space="preserve">
+    <value>groupBoxCommands</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommErase.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="checkBoxCommSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxCommSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="checkBoxCommSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 17</value>
+  </data>
+  <data name="checkBoxCommSize.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="checkBoxCommSize.Text" xml:space="preserve">
+    <value>Get flash size</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommSize.Name" xml:space="preserve">
+    <value>checkBoxCommSize</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommSize.Parent" xml:space="preserve">
+    <value>groupBoxCommands</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCommSize.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="groupBoxCommands.Location" type="System.Drawing.Point, System.Drawing">
+    <value>325, 3</value>
+  </data>
+  <data name="groupBoxCommands.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 230</value>
+  </data>
+  <data name="groupBoxCommands.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="groupBoxCommands.Text" xml:space="preserve">
+    <value>Optional commands</value>
+  </data>
+  <data name="&gt;&gt;groupBoxCommands.Name" xml:space="preserve">
+    <value>groupBoxCommands</value>
+  </data>
+  <data name="&gt;&gt;groupBoxCommands.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxCommands.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBoxCommands.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="checkBoxBrAppValidation.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxBrAppValidation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 209</value>
+  </data>
+  <data name="checkBoxBrAppValidation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 17</value>
+  </data>
+  <data name="checkBoxBrAppValidation.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="checkBoxBrAppValidation.Text" xml:space="preserve">
+    <value>Bootloader application validation</value>
+  </data>
+  <data name="&gt;&gt;checkBoxBrAppValidation.Name" xml:space="preserve">
+    <value>checkBoxBrAppValidation</value>
+  </data>
+  <data name="&gt;&gt;checkBoxBrAppValidation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxBrAppValidation.Parent" xml:space="preserve">
+    <value>groupBoxOptions</value>
+  </data>
+  <data name="&gt;&gt;checkBoxBrAppValidation.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="comboBoxIOComponent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>175, 19</value>
+  </data>
+  <data name="comboBoxIOComponent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="comboBoxIOComponent.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;comboBoxIOComponent.Name" xml:space="preserve">
+    <value>comboBoxIOComponent</value>
+  </data>
+  <data name="&gt;&gt;comboBoxIOComponent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxIOComponent.Parent" xml:space="preserve">
+    <value>groupBoxOptions</value>
+  </data>
+  <data name="&gt;&gt;comboBoxIOComponent.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelIOComponent.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelIOComponent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 22</value>
+  </data>
+  <data name="labelIOComponent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 13</value>
+  </data>
+  <data name="labelIOComponent.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="labelIOComponent.Text" xml:space="preserve">
+    <value>Communication component:</value>
+  </data>
+  <data name="&gt;&gt;labelIOComponent.Name" xml:space="preserve">
+    <value>labelIOComponent</value>
+  </data>
+  <data name="&gt;&gt;labelIOComponent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelIOComponent.Parent" xml:space="preserve">
+    <value>groupBoxOptions</value>
+  </data>
+  <data name="&gt;&gt;labelIOComponent.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="checkBoxMultiApp.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxMultiApp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
+  </data>
+  <data name="checkBoxMultiApp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 17</value>
+  </data>
+  <data name="checkBoxMultiApp.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="checkBoxMultiApp.Text" xml:space="preserve">
+    <value>Multi-application bootloader</value>
+  </data>
+  <data name="&gt;&gt;checkBoxMultiApp.Name" xml:space="preserve">
+    <value>checkBoxMultiApp</value>
+  </data>
+  <data name="&gt;&gt;checkBoxMultiApp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxMultiApp.Parent" xml:space="preserve">
+    <value>groupBoxOptions</value>
+  </data>
+  <data name="&gt;&gt;checkBoxMultiApp.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelZero.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelZero.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 109</value>
+  </data>
+  <data name="labelZero.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
+  </data>
+  <data name="labelZero.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="labelZero.Text" xml:space="preserve">
+    <value>(0: wait forever)</value>
+  </data>
+  <data name="&gt;&gt;labelZero.Name" xml:space="preserve">
+    <value>labelZero</value>
+  </data>
+  <data name="&gt;&gt;labelZero.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelZero.Parent" xml:space="preserve">
+    <value>groupBoxOptions</value>
+  </data>
+  <data name="&gt;&gt;labelZero.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="checkBoxBeAppValidation.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxBeAppValidation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 186</value>
+  </data>
+  <data name="checkBoxBeAppValidation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 17</value>
+  </data>
+  <data name="checkBoxBeAppValidation.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="checkBoxBeAppValidation.Text" xml:space="preserve">
+    <value>Fast bootloadable application validation</value>
+  </data>
+  <data name="&gt;&gt;checkBoxBeAppValidation.Name" xml:space="preserve">
+    <value>checkBoxBeAppValidation</value>
+  </data>
+  <data name="&gt;&gt;checkBoxBeAppValidation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxBeAppValidation.Parent" xml:space="preserve">
+    <value>groupBoxOptions</value>
+  </data>
+  <data name="&gt;&gt;checkBoxBeAppValidation.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="numUpDownWaitTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>173, 86</value>
+  </data>
+  <data name="numUpDownWaitTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 20</value>
+  </data>
+  <data name="numUpDownWaitTime.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;numUpDownWaitTime.Name" xml:space="preserve">
+    <value>numUpDownWaitTime</value>
+  </data>
+  <data name="&gt;&gt;numUpDownWaitTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numUpDownWaitTime.Parent" xml:space="preserve">
+    <value>groupBoxOptions</value>
+  </data>
+  <data name="&gt;&gt;numUpDownWaitTime.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="labelPktChecksumType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelPktChecksumType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 160</value>
+  </data>
+  <data name="labelPktChecksumType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 13</value>
+  </data>
+  <data name="labelPktChecksumType.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="labelPktChecksumType.Text" xml:space="preserve">
+    <value>Packet checksum type:</value>
+  </data>
+  <data name="&gt;&gt;labelPktChecksumType.Name" xml:space="preserve">
+    <value>labelPktChecksumType</value>
+  </data>
+  <data name="&gt;&gt;labelPktChecksumType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelPktChecksumType.Parent" xml:space="preserve">
+    <value>groupBoxOptions</value>
+  </data>
+  <data name="&gt;&gt;labelPktChecksumType.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="comboBoxPktChecksumType.Items" xml:space="preserve">
+    <value>Basic summation</value>
+  </data>
+  <data name="comboBoxPktChecksumType.Items1" xml:space="preserve">
+    <value>CRC-16-CCITT</value>
+  </data>
+  <data name="comboBoxPktChecksumType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>173, 157</value>
+  </data>
+  <data name="comboBoxPktChecksumType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 21</value>
+  </data>
+  <data name="comboBoxPktChecksumType.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;comboBoxPktChecksumType.Name" xml:space="preserve">
+    <value>comboBoxPktChecksumType</value>
+  </data>
+  <data name="&gt;&gt;comboBoxPktChecksumType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxPktChecksumType.Parent" xml:space="preserve">
+    <value>groupBoxOptions</value>
+  </data>
+  <data name="&gt;&gt;comboBoxPktChecksumType.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="checkBoxWaitTime.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxWaitTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 65</value>
+  </data>
+  <data name="checkBoxWaitTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 17</value>
+  </data>
+  <data name="checkBoxWaitTime.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="checkBoxWaitTime.Text" xml:space="preserve">
+    <value>Wait for command</value>
+  </data>
+  <data name="&gt;&gt;checkBoxWaitTime.Name" xml:space="preserve">
+    <value>checkBoxWaitTime</value>
+  </data>
+  <data name="&gt;&gt;checkBoxWaitTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxWaitTime.Parent" xml:space="preserve">
+    <value>groupBoxOptions</value>
+  </data>
+  <data name="&gt;&gt;checkBoxWaitTime.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="textBoxVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>173, 131</value>
+  </data>
+  <data name="textBoxVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 20</value>
+  </data>
+  <data name="textBoxVersion.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;textBoxVersion.Name" xml:space="preserve">
+    <value>textBoxVersion</value>
+  </data>
+  <data name="&gt;&gt;textBoxVersion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxVersion.Parent" xml:space="preserve">
+    <value>groupBoxOptions</value>
+  </data>
+  <data name="&gt;&gt;textBoxVersion.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="labelVersion.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 134</value>
+  </data>
+  <data name="labelVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 13</value>
+  </data>
+  <data name="labelVersion.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelVersion.Text" xml:space="preserve">
+    <value>Bootloader application version:</value>
+  </data>
+  <data name="&gt;&gt;labelVersion.Name" xml:space="preserve">
+    <value>labelVersion</value>
+  </data>
+  <data name="&gt;&gt;labelVersion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelVersion.Parent" xml:space="preserve">
+    <value>groupBoxOptions</value>
+  </data>
+  <data name="&gt;&gt;labelVersion.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="labelWaitTime.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelWaitTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>22, 88</value>
+  </data>
+  <data name="labelWaitTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 13</value>
+  </data>
+  <data name="labelWaitTime.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelWaitTime.Text" xml:space="preserve">
+    <value>Wait for command time (ms):</value>
+  </data>
+  <data name="&gt;&gt;labelWaitTime.Name" xml:space="preserve">
+    <value>labelWaitTime</value>
+  </data>
+  <data name="&gt;&gt;labelWaitTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelWaitTime.Parent" xml:space="preserve">
+    <value>groupBoxOptions</value>
+  </data>
+  <data name="&gt;&gt;labelWaitTime.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="groupBoxOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="groupBoxOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>316, 230</value>
+  </data>
+  <data name="groupBoxOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBoxOptions.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="&gt;&gt;groupBoxOptions.Name" xml:space="preserve">
+    <value>groupBoxOptions</value>
+  </data>
+  <data name="&gt;&gt;groupBoxOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBoxOptions.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>469, 255</value>
+  </data>
+  <data name="&gt;&gt;errProvider.Name" xml:space="preserve">
+    <value>errProvider</value>
+  </data>
+  <data name="&gt;&gt;errProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>CyGeneralPage</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>Bootloader_v1_30.CyEditingWrapperControl, Bootloader_v1_30, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+</root>
