@@ -26,7 +26,7 @@ uint8_t slaveAddress;
 uint8_t txOverflow;
 uint8_t rxOverflow;
 
-void I2C_begin()
+void Wire::begin()
 {
     I2C_Start();
     A4_BYP |= A4_MASK;
@@ -35,7 +35,7 @@ void I2C_begin()
     A5_SetDriveMode(A5_DM_OD_LO);
 }
 
-uint8_t I2C_requestFrom(uint8_t address, uint8_t quantity, \
+uint8_t Wire::requestFrom(uint8_t address, uint8_t quantity, \
     enum XFER_MODE stop)
 {
     I2C_MasterClearStatus();

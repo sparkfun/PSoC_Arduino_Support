@@ -9,8 +9,11 @@
  *
  * ========================================
 */
+
 extern "C" {
+
 #include <project.h>
+
 }
 
 #include <stdio.h>
@@ -21,6 +24,8 @@ extern "C" {
 #define I2C      0
 #define ANALOG   1
 #define DIGITAL  2
+
+void exitToBootloader(void);
 
 int main()
 {
@@ -37,8 +42,24 @@ int main()
     for(;;)
     {
       loop();
-
+      if (USBUART_IsLineChanged())
+      {
+        if (USBUART_GetDTERate() == 1200)
+        {
+          exitToBootloader();
+        }
+      }
     }
+}
+
+#define Bootloader_SCHEDULE_BTLDR   (0x00u)
+#define Bootloader_RESET_SR0_REG    (* (reg8 *) CYREG_RESET_SR0)
+#define Bootloader_SET_RUN_TYPE(x)  (Bootloader_RESET_SR0_REG = (x))
+
+void exitToBootloader(void)
+{
+  Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDR);
+  CySoftwareReset();
 }
 
 /* [] END OF FILE */
