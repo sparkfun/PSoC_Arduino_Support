@@ -11,11 +11,10 @@
 */
 
 #ifndef _arduino_time_h
-    #define _arduino_time_h
+#define _arduino_time_h
     
-extern "C" {
 #include <Project.h>
-}
+  
     #define millis() Millis_Counter_ReadCounter()
     #define micros() Micros_Counter_ReadCounter()
     

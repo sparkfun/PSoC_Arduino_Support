@@ -13,7 +13,7 @@
 
 extern "C" {
 #include <Project.h>
-}
+} 
 
 #include "stdint.h"
 #include "Arduino_I2C.h"
@@ -60,12 +60,12 @@ uint8_t Wire::requestFrom(uint8_t address, uint8_t quantity, \
     return quantity;
 }
 
-void I2C_beginTransmission(uint8_t address)
+void Wire::beginTransmission(uint8_t address)
 {
     slaveAddress = address;
 }
 
-uint8_t I2C_endTransmission(enum XFER_MODE stop)
+uint8_t Wire::endTransmission(enum XFER_MODE stop)
 {
     I2C_MasterClearStatus();
     
@@ -89,7 +89,7 @@ uint8_t I2C_endTransmission(enum XFER_MODE stop)
     txBufferSize = 0;
     return 0;
 }
-uint8_t I2C_write(uint8_t *buffer, uint8_t length)
+uint8_t Wire::write(uint8_t *buffer, uint8_t length)
 {
     uint8_t i;
     if (txBufferSize == 32)
@@ -108,12 +108,12 @@ uint8_t I2C_write(uint8_t *buffer, uint8_t length)
     }
     return i;
 }
-uint8_t I2C_available()
+uint8_t Wire::available()
 {
     return txBufferSize;
 }
 
-uint8_t I2C_read()
+uint8_t Wire::read()
 {
     if (rxBufferSize == 0) return 0;
     return i2cRXBuffer[--rxBufferSize];

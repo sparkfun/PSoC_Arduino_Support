@@ -1,5 +1,9 @@
 #include <device.h>
 
+/* The clock input to the ResetCounter timer is 24MHz. By default, we want a
+*  10-second timeout before dumping the bootloader and going to the app. */
+#define TIMEOUT_PERIOD 240
+//#define USE_UART
 int main()
 {
   CyGlobalIntEnable;
@@ -8,8 +12,12 @@ int main()
   //sprintf(testString, "I am the very model of a modern major general");
 
 	/* Initialize PWM */
-  PWM_Start();     
-  //UART_Start();
+  PWM_Start();  
+  ResetCounter_Start();
+  ResetCounter_WriteCompare(TIMEOUT_PERIOD);
+  #ifdef USE_UART
+  UART_Start();
+  #endif
   
   //UART_PutString(testString);
 	
@@ -78,7 +86,7 @@ cystatus CyBtldrCommWrite(uint8* buffer, uint16 size, uint16* count, uint8 timeO
       if (numPackets > 0)
       {
         USBUART_PutData((buffer+(packetsSent*64)), 64);
-        #if 0 
+        #ifdef USE_UART
         while(UART_GetTxBufferSize() != 0)
         { /* wait for clear data path on UART */ }
         UART_PutArray((buffer+(packetsSent*64)), 64);
@@ -90,7 +98,7 @@ cystatus CyBtldrCommWrite(uint8* buffer, uint16 size, uint16* count, uint8 timeO
       else if (numPackets == 0)
       {
         USBUART_PutData((buffer+(packetsSent*64)), lastPacketSize);
-        #if 0
+        #ifdef USE_UART
         while(UART_GetTxBufferSize() != 0)
         { /* wait for clear data path on UART */ }
         UART_PutArray((buffer+(packetsSent*64)), lastPacketSize);
@@ -129,7 +137,7 @@ cystatus CyBtldrCommRead (uint8* buffer, uint16 size, uint16* count, uint8 timeO
       internalTimeout = 2;
       }
       USBUART_GetData((buffer + *count), dataAvailableCnt);
-      #if 0
+      #ifdef USE_UART
       while(UART_GetTxBufferSize() != 0)
       { /* wait for clear data path on UART */ }
       UART_PutArray((buffer+*count), dataAvailableCnt);

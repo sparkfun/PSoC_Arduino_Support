@@ -392,7 +392,9 @@ static void Bootloader_HostLink(void)
       CyBtldrCommWrite(packetBuffer, 1, NULL, 0);
       break;
     }
-  } while (1);
+  } while ((ResetCounter_ReadStatusRegister() & 0x01) == 0);      
+  Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDB);
+  CySoftwareReset();
 }
 
 /*******************************************************************************

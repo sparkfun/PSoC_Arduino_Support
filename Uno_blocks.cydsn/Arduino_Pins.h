@@ -14,10 +14,7 @@
 #define _arduino_pins_h
   
 #include <stdint.h>
-
-extern "C" {
 #include <Project.h>
-}
     
     #define D0 0
     #define D1 1
@@ -49,32 +46,34 @@ extern "C" {
     #define HIGH 1u
     #define LOW 0u
     
-    enum PIN_MODE {OUTPUT, INPUT, INPUT_PULLUP};
+    enum PIN_MODE {OUTPUT, INPUT, INPUT_PULLUP, PERIPHERAL};
+    enum BYPASS_MODE {PIN_ENABLE_BYPASS, PIN_DISABLE_BYPASS};
     
     void pinFuncInit(void);
     void digitalWrite(uint8_t pin, uint8_t level);
     void pinMode(uint8_t pin, enum PIN_MODE mode);
     uint8_t digitalRead(uint8_t pin);
-    void D0_Bypass();
-    void D1_Bypass();
-    void D2_Bypass();
-    void D3_Bypass();
-    void D4_Bypass();
-    void D5_Bypass();
-    void D6_Bypass();
-    void D7_Bypass();
-    void D8_Bypass();
-    void D9_Bypass();
-    void D10_Bypass();
-    void D11_Bypass();
-    void D12_Bypass();
-    void D13_Bypass();
-    void A0_Bypass();
-    void A1_Bypass();
-    void A2_Bypass();
-    void A3_Bypass();
-    void A4_Bypass();
-    void A5_Bypass();
+    void D0_Bypass(enum BYPASS_MODE enableBypass);
+    void D1_Bypass(enum BYPASS_MODE enableBypass);
+    void D2_Bypass(enum BYPASS_MODE enableBypass);
+    void D3_Bypass(enum BYPASS_MODE enableBypass);
+    void D4_Bypass(enum BYPASS_MODE enableBypass);
+    void D5_Bypass(enum BYPASS_MODE enableBypass);
+    void D6_Bypass(enum BYPASS_MODE enableBypass);
+    void D7_Bypass(enum BYPASS_MODE enableBypass);
+    void D8_Bypass(enum BYPASS_MODE enableBypass);
+    void D9_Bypass(enum BYPASS_MODE enableBypass);
+    void D10_Bypass(enum BYPASS_MODE enableBypass);
+    void D11_Bypass(enum BYPASS_MODE enableBypass);
+    void D12_Bypass(enum BYPASS_MODE enableBypass);
+    void D13_Bypass(enum BYPASS_MODE enableBypass);
+    void A0_Bypass(enum BYPASS_MODE enableBypass);
+    void A1_Bypass(enum BYPASS_MODE enableBypass);
+    void A2_Bypass(enum BYPASS_MODE enableBypass);
+    void A3_Bypass(enum BYPASS_MODE enableBypass);
+    void A4_Bypass(enum BYPASS_MODE enableBypass);
+    void A5_Bypass(enum BYPASS_MODE enableBypass);
     
 #endif
+
 /* [] END OF FILE */
