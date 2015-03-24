@@ -3,6 +3,8 @@
 #  project directory to some hardware directory located elsewhere on your
 #  computer (defined by the core variable).
 core=~/Dropbox/Projects/Hardware/SparkFun/psoc/cores/arduino
+rm $core/* 2>/dev/null
+rm $core/core/*
 # First, we can just straight-up copy any header files...
 cp *.h $core/
 # ...or .cpp files. NB: When you change the suffix of the file from .c to .cpp

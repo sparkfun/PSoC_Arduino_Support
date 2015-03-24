@@ -23,7 +23,7 @@ int main()
     
     CyGlobalIntEnable;   
     USBUART_FunctionAttach();
-    //enableUSBCDC();
+    enableUSBCDC();
     Serial1_FunctionAttach();
     
     setup();

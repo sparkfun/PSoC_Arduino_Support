@@ -208,9 +208,8 @@ static void Bootloader_HostLink(void)
 
   /* Initialize communications channel. */
   CyBtldrCommStart();
-
-  /* Enable global interrupts */
-  CyGlobalIntEnable;
+  CyDelay(5000);
+  USBUART_PutString("Hadoop");
   
   do
   {
@@ -220,7 +219,11 @@ static void Bootloader_HostLink(void)
                                  Bootloader_SIZEOF_COMMAND_BUFFER,
                                  &numberRead,
                                  10);
-
+    if ((ResetCounter_ReadStatusRegister() & 0x01) == 0)
+    {
+      Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDB);
+      CySoftwareReset();
+    }
     } while ( readStat != CYRET_SUCCESS );
 
     switch(packetBuffer[0])
