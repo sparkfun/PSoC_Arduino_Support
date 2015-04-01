@@ -11,20 +11,21 @@ extern "C" {
 #define DIGITAL  2
 
 struct SerialHelperFuncs USBUART_Helpers;
-struct SerialHelperFuncs Serial1_Helpers;
+struct SerialHelperFuncs UART_Helpers;
 UARTClass Serial(true, &USBUART_Helpers);
-UARTClass Serial1(false, &Serial1_Helpers);
+UARTClass Serial1(false, &UART_Helpers);
 
 void exitToBootloader(void);
 
 int main()
 {
-    pinFuncInit();
     
     CyGlobalIntEnable;   
     USBUART_FunctionAttach();
     enableUSBCDC();
-    Serial1_FunctionAttach();
+    UART_FunctionAttach();
+    
+    pinFuncInit();
     
     setup();
       

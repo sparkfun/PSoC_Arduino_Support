@@ -13,7 +13,7 @@ extern "C" {
  ******************************************************/
 
 extern struct SerialHelperFuncs USBUART_Helpers;
-extern struct SerialHelperFuncs Serial1_Helpers;
+extern struct SerialHelperFuncs UART_Helpers;
 
 // Wait for PC to configure USB for CONFIG_DELAY * CONFIG_LOOPS milliseconds
 #define CONFIG_DELAY 10
@@ -56,6 +56,9 @@ These are for non-USB UARTs only:
   void (*portDisable)(void);
   void (*blockForWriteComplete)(void);
 **********************************************************************/
+
+void Serial_CustomPutArray(const uint8_t* buffer, uint16_t size);
+
 void USBUART_FunctionAttach()
 {
   USBUART_Helpers.bufferSize = USBUART_GetCount;
@@ -64,21 +67,23 @@ void USBUART_FunctionAttach()
   USBUART_Helpers.blockForReadyToWrite = USBUART_CDCIsReady;
 }
 
-uint16_t Serial1_CustomGetDataArray(uint8_t* buffer, uint16_t size);
-uint16_t Serial1_CustomGetBufferSize(void);
-void     Serial1_CustomPutArray(const uint8_t* buffer, uint16_t size);
-bool     Serial1_CustomPortEnable(void);
-void     Serial1_CustomPortDisable(void);
+uint16_t UART_CustomGetDataArray(uint8_t* buffer, uint16_t size);
+uint16_t UART_CustomGetBufferSize(void);
+void     UART_CustomPutArray(const uint8_t* buffer, uint16_t size);
+bool     UART_CustomPortEnable(void);
+void     UART_CustomPortDisable(void);
 void     UART1Clock_CustomSetDivider(uint16_t newDivider);
+uint8_t  UART_CustomIsReady(void);
 
-void Serial1_FunctionAttach()
+void UART_FunctionAttach()
 {
-  Serial1_Helpers.bufferSize = Serial1_CustomGetBufferSize;
-  Serial1_Helpers.sendData = Serial1_CustomPutArray;
-  Serial1_Helpers.getData = Serial1_CustomGetDataArray;
-  Serial1_Helpers.portEnable = Serial1_CustomPortEnable;
-  Serial1_Helpers.portDisable = Serial1_CustomPortDisable;
-  Serial1_Helpers.clockAdjust = UART1Clock_CustomSetDivider;
+  UART_Helpers.bufferSize = UART_CustomGetBufferSize;
+  UART_Helpers.sendData = UART_CustomPutArray;
+  UART_Helpers.getData = UART_CustomGetDataArray;
+  UART_Helpers.portEnable = UART_CustomPortEnable;
+  UART_Helpers.portDisable = UART_CustomPortDisable;
+  UART_Helpers.clockAdjust = UART1Clock_CustomSetDivider;
+  UART_Helpers.blockForReadyToWrite = UART_CustomIsReady;
 }
 
 
@@ -96,35 +101,34 @@ UART_getBufferSize readBufSize;
 
 uint16_t UART_GetDataArray(uint8_t* buffer, uint8_t size);
 
-uint16_t Serial1_CustomGetDataArray(uint8_t* buffer, uint16_t size)
+uint16_t UART_CustomGetDataArray(uint8_t* buffer, uint16_t size)
 {
-  readByte = Serial1_ReadRxData;
-  readBufSize = Serial1_GetRxBufferSize;
+  readByte = UART_ReadRxData;
+  readBufSize = UART_GetRxBufferSize;
   return UART_GetDataArray(buffer, size);
 }
 
-uint16_t Serial1_CustomGetBufferSize(void)
+uint16_t UART_CustomGetBufferSize(void)
 {
-  return (uint16_t)Serial1_GetRxBufferSize();
+  return (uint16_t)UART_GetRxBufferSize();
 }
 
-void Serial1_CustomPutArray(const uint8_t* buffer, uint16_t size)
+void UART_CustomPutArray(const uint8_t* buffer, uint16_t size)
 {
-  Serial1_PutArray(buffer, size);
+  UART_PutArray(buffer, size);
 }
 
-bool Serial1_CustomPortEnable(void)
+bool UART_CustomPortEnable(void)
 {
-  Serial1_Start();
-  D0_Bypass(PIN_ENABLE_BYPASS);
-  pinMode(D1, OUTPUT);
-  D1_Bypass(PIN_ENABLE_BYPASS);
+  UART_Start();
+  pinMode(D0, PERIPHERAL_IN);
+  pinMode(D1, PERIPHERAL_OUT);
   return true; 
 }
 
-void Serial1_CustomPortDisable(void)
+void UART_CustomPortDisable(void)
 {
-  Serial1_Stop();
+  UART_Stop();
   D0_Bypass(PIN_DISABLE_BYPASS);
   D1_Bypass(PIN_DISABLE_BYPASS); 
 }
@@ -158,6 +162,10 @@ uint16_t UART_GetDataArray(uint8_t* buffer, uint8_t size)
 
 void UART1Clock_CustomSetDivider(uint16_t newDivider)
 {
-  //UART1Clock_SetDividerValue(newDivider);
+  UART_Clock_SetDividerValue(newDivider);
 }
 
+uint8_t  UART_CustomIsReady( void )
+{
+  return (UART_ReadTxStatus() != UART_TX_STS_FIFO_FULL);
+}

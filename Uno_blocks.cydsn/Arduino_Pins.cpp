@@ -1,15 +1,3 @@
-/* ========================================
- *
- * Copyright YOUR COMPANY, THE YEAR
- * All Rights Reserved
- * UNPUBLISHED, LICENSED SOFTWARE.
- *
- * CONFIDENTIAL AND PROPRIETARY INFORMATION
- * WHICH IS THE PROPERTY OF your company.
- *
- * ========================================
-*/
-
 extern "C" {
 #include <Project.h>
 }
@@ -133,49 +121,61 @@ void pinMode(uint8_t pin, enum PIN_MODE mode)
     switch(mode)
     {
         case OUTPUT:
-        pinModeFuncs[pin](PIN_DM_STRONG);
+          pinModeFuncs[pin](PIN_DM_STRONG);
         break;
         case INPUT_PULLUP:
-        pinModeFuncs[pin](PIN_DM_RES_UP);
-        pinWriteFuncs[pin](1);
+          pinModeFuncs[pin](PIN_DM_RES_UP);
+          pinWriteFuncs[pin](1);
         break;
         case PERIPHERAL:
-        pinBypassFuncs[pin](PIN_DISABLE_BYPASS);
+          pinBypassFuncs[pin](PIN_ENABLE_BYPASS);
+        break;
+        case PERIPHERAL_IN:
+          pinBypassFuncs[pin](PIN_ENABLE_BYPASS);
+          pinModeFuncs[pin](PIN_DM_DIG_HIZ);
+        break;
+        case PERIPHERAL_OUT:
+          pinBypassFuncs[pin](PIN_ENABLE_BYPASS);
+          pinModeFuncs[pin](PIN_DM_STRONG);
+        break;
+        case PERIPHERAL_OD:
+         pinBypassFuncs[pin](PIN_ENABLE_BYPASS);
+          pinModeFuncs[pin](PIN_DM_OD_LO);
         break;
         case INPUT:
         default:
-        pinModeFuncs[pin](PIN_DM_DIG_HIZ);
-        
+          pinModeFuncs[pin](PIN_DM_DIG_HIZ);
+        break; 
     }
 }
 
 void D0_Bypass(enum BYPASS_MODE enableBypass)
 {
-/*  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     D0_BYP &= ~D0_MASK;
   }
   else
   {
     D0_BYP |= D0_MASK;
-  }*/
+  }
 }
 
 void D1_Bypass(enum BYPASS_MODE enableBypass)
 {
-  /*if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     D1_BYP &= ~D1_MASK;
   }
   else
   {
     D1_BYP |= D1_MASK;
-  }*/
+  }
 }
 
 void D2_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     D2_BYP &= ~D2_MASK;
   }
@@ -187,7 +187,7 @@ void D2_Bypass(enum BYPASS_MODE enableBypass)
 
 void D3_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     D3_BYP &= ~D3_MASK;
   }
@@ -199,7 +199,7 @@ void D3_Bypass(enum BYPASS_MODE enableBypass)
 
 void D4_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     D4_BYP &= ~D4_MASK;
   }
@@ -211,7 +211,7 @@ void D4_Bypass(enum BYPASS_MODE enableBypass)
 
 void D5_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     D5_BYP &= ~D5_MASK;
   }
@@ -223,7 +223,7 @@ void D5_Bypass(enum BYPASS_MODE enableBypass)
 
 void D6_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     D6_BYP &= ~D6_MASK;
   }
@@ -235,7 +235,7 @@ void D6_Bypass(enum BYPASS_MODE enableBypass)
 
 void D7_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     D7_BYP &= ~D7_MASK;
   }
@@ -247,7 +247,7 @@ void D7_Bypass(enum BYPASS_MODE enableBypass)
 
 void D8_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     D8_BYP &= ~D8_MASK;
   }
@@ -259,7 +259,7 @@ void D8_Bypass(enum BYPASS_MODE enableBypass)
 
 void D9_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     D9_BYP &= ~D9_MASK;
   }
@@ -271,7 +271,7 @@ void D9_Bypass(enum BYPASS_MODE enableBypass)
 
 void D10_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     D10_BYP &= ~D10_MASK;
   }
@@ -283,7 +283,7 @@ void D10_Bypass(enum BYPASS_MODE enableBypass)
 
 void D11_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     D11_BYP &= ~D11_MASK;
   }
@@ -295,7 +295,7 @@ void D11_Bypass(enum BYPASS_MODE enableBypass)
 
 void D12_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     D12_BYP &= ~D12_MASK;
   }
@@ -307,7 +307,7 @@ void D12_Bypass(enum BYPASS_MODE enableBypass)
 
 void D13_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     D13_BYP &= ~D13_MASK;
   }
@@ -319,7 +319,7 @@ void D13_Bypass(enum BYPASS_MODE enableBypass)
 
 void A0_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     A0_BYP &= ~A0_MASK;
   }
@@ -331,7 +331,7 @@ void A0_Bypass(enum BYPASS_MODE enableBypass)
 
 void A1_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     A1_BYP &= ~A1_MASK;
   }
@@ -343,7 +343,7 @@ void A1_Bypass(enum BYPASS_MODE enableBypass)
 
 void A2_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     A2_BYP &= ~A2_MASK;
   }
@@ -355,7 +355,7 @@ void A2_Bypass(enum BYPASS_MODE enableBypass)
 
 void A3_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     A3_BYP &= ~A3_MASK;
   }
@@ -367,7 +367,7 @@ void A3_Bypass(enum BYPASS_MODE enableBypass)
 
 void A4_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     A4_BYP &= ~A4_MASK;
   }
@@ -379,7 +379,7 @@ void A4_Bypass(enum BYPASS_MODE enableBypass)
 
 void A5_Bypass(enum BYPASS_MODE enableBypass)
 {
-  if (enableBypass == PIN_ENABLE_BYPASS)
+  if (enableBypass == PIN_DISABLE_BYPASS)
   {
     A5_BYP &= ~A5_MASK;
   }

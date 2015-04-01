@@ -17,25 +17,69 @@ extern "C" {
 
 #include "stdint.h"
 #include "Arduino_I2C.h"
+#include "Arduino_Pins.h"
 
-uint8_t i2cRXBuffer[32];
-uint8_t i2cTXBuffer[32];
-uint8_t rxBufferSize;
-uint8_t txBufferSize;
-uint8_t slaveAddress;
-uint8_t txOverflow;
-uint8_t rxOverflow;
+#define BUS_CLOCK_RATE 24000000
 
-void Wire::begin()
+TwoWire Wire = TwoWire();
+
+void TwoWire::begin()
 {
+    pinMode(A4, PERIPHERAL_OD);
+    pinMode(A5, PERIPHERAL_OD);
+    I2C_Enable_Write(0x01);
     I2C_Start();
-    A4_BYP |= A4_MASK;
-    A5_BYP |= A5_MASK;
-    A4_SetDriveMode(A4_DM_OD_LO);
-    A5_SetDriveMode(A5_DM_OD_LO);
 }
 
-uint8_t Wire::requestFrom(uint8_t address, uint8_t quantity, \
+void TwoWire::setClock(uint32_t newClockRate)
+{
+  uint32_t clockDivider = (1/BUS_CLOCK_RATE)*newClockRate;
+  twiClock = newClockRate;
+  *(uint8_t*)(CYREG_I2C_CLK_DIV1) = (uint8_t)clockDivider;
+  *(uint8_t*)(CYREG_I2C_CLK_DIV1) = (uint8_t)((clockDivider>>8)&0x02);
+
+}
+void TwoWire::beginTransmission(uint8_t address)
+{
+    slaveAddress = address;
+}
+
+void TwoWire::beginTransmission(int address)
+{
+    slaveAddress = (uint8_t) address;
+}
+
+uint8_t TwoWire::endTransmission(enum XFER_MODE stop)
+{
+    I2C_MasterClearStatus();
+    
+    if (stop == COMPLETE)
+    {
+        I2C_MasterWriteBuf(slaveAddress, i2cTXBuffer, i2cTXBufferSize, \
+            I2C_MODE_COMPLETE_XFER);
+    }
+    else if (stop == REPEATED_START)
+    {
+        I2C_MasterWriteBuf(slaveAddress, i2cTXBuffer, i2cTXBufferSize, \
+            I2C_MODE_REPEAT_START);
+    }
+    else
+    {
+        I2C_MasterWriteBuf(slaveAddress, i2cTXBuffer, i2cTXBufferSize, \
+            I2C_MODE_NO_STOP);
+    }
+    
+    while(0u != (I2C_MasterStatus() & I2C_MSTAT_XFER_INP));
+    i2cTXBufferSize = 0;
+    return 0;
+}
+
+uint8_t TwoWire::endTransmission()
+{
+  return endTransmission(COMPLETE);
+}
+    
+uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity, \
     enum XFER_MODE stop)
 {
     I2C_MasterClearStatus();
@@ -56,51 +100,37 @@ uint8_t Wire::requestFrom(uint8_t address, uint8_t quantity, \
     }
     
     while(0u == (I2C_MasterStatus() & I2C_MSTAT_RD_CMPLT));
-    rxBufferSize = quantity;
+    i2cRXBufferSize = quantity;
     return quantity;
 }
 
-void Wire::beginTransmission(uint8_t address)
+uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity)
 {
-    slaveAddress = address;
+  return requestFrom(address, quantity, COMPLETE);
 }
 
-uint8_t Wire::endTransmission(enum XFER_MODE stop)
+uint8_t TwoWire::requestFrom(int address, int quantity)
 {
-    I2C_MasterClearStatus();
-    
-    if (stop == COMPLETE)
-    {
-        I2C_MasterWriteBuf(slaveAddress, i2cTXBuffer, txBufferSize, \
-            I2C_MODE_COMPLETE_XFER);
-    }
-    else if (stop == REPEATED_START)
-    {
-        I2C_MasterWriteBuf(slaveAddress, i2cTXBuffer, txBufferSize, \
-            I2C_MODE_REPEAT_START);
-    }
-    else
-    {
-        I2C_MasterWriteBuf(slaveAddress, i2cTXBuffer, txBufferSize, \
-            I2C_MODE_NO_STOP);
-    }
-    
-    while(0u == (I2C_MasterStatus() & I2C_MSTAT_WR_CMPLT));
-    txBufferSize = 0;
-    return 0;
+  return requestFrom((uint8_t)address, (uint8_t)quantity, (enum XFER_MODE)COMPLETE);
 }
-uint8_t Wire::write(uint8_t *buffer, uint8_t length)
+    
+uint8_t TwoWire::requestFrom(int address, int quantity, int sendStop)
+{
+  return requestFrom((uint8_t) address, (uint8_t) quantity, (enum XFER_MODE)sendStop);
+}
+
+size_t TwoWire::write(uint8_t *buffer, uint8_t length)
 {
     uint8_t i;
-    if (txBufferSize == 32)
+    if (i2cTXBufferSize == 32)
     {
         txOverflow = 1;
         return 0;
     }
     for (i=0; i < length; i++)
     {
-        i2cTXBuffer[txBufferSize+i] = buffer[i];
-        if (++txBufferSize == 32)
+        i2cTXBuffer[i2cTXBufferSize+i] = buffer[i];
+        if (++i2cTXBufferSize == 32)
         {
             txOverflow = 1;
             return i+1;
@@ -108,15 +138,31 @@ uint8_t Wire::write(uint8_t *buffer, uint8_t length)
     }
     return i;
 }
-uint8_t Wire::available()
+
+size_t TwoWire::write(uint8_t buffer)
 {
-    return txBufferSize;
+  return write((uint8_t *)&buffer, 1);
 }
 
-uint8_t Wire::read()
+int TwoWire::available()
 {
-    if (rxBufferSize == 0) return 0;
-    return i2cRXBuffer[--rxBufferSize];
+    return i2cRXBufferSize;
+}
+
+int TwoWire::read()
+{
+    if (i2cRXBufferSize == 0) return -1;
+    return i2cRXBuffer[--i2cRXBufferSize];
+}
+
+int TwoWire::peek()
+{
+    if (i2cRXBufferSize == 0) return -1;
+    return i2cRXBuffer[i2cRXBufferSize];
+}
+
+void TwoWire::flush()
+{
 }
 
 /* [] END OF FILE */

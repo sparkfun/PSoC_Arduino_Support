@@ -13,11 +13,15 @@
 #define __arduino_h_
   
 #define boolean bool
+#define byte uint8_t
+#define PI 3.1415
+#define _BV(bit) (1 << (bit))
   
 extern "C" {
 #include <project.h>
 }
 
+#include "Arduino_HW_Interrupt.h"
 #include "Arduino_Advanced_IO.h"
 #include "Arduino_Analog_In.h"
 #include "Arduino_Analog_Out.h"

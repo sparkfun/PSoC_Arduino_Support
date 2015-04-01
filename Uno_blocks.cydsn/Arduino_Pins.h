@@ -46,7 +46,8 @@
     #define HIGH 1u
     #define LOW 0u
     
-    enum PIN_MODE {OUTPUT, INPUT, INPUT_PULLUP, PERIPHERAL};
+    enum PIN_MODE {OUTPUT, INPUT, INPUT_PULLUP, PERIPHERAL, PERIPHERAL_OUT,
+                   PERIPHERAL_IN, PERIPHERAL_OD};
     enum BYPASS_MODE {PIN_ENABLE_BYPASS, PIN_DISABLE_BYPASS};
     
     void pinFuncInit(void);

@@ -20,7 +20,7 @@
 #include "cytypes.h"
 #include "CyFlash.h"
   
-#define APPLICATION_START_ADDRESS 0x00003011
+#define APPLICATION_START_ADDRESS 0x00002411
 
 /*******************************************************************************
 * Bootloadable applications identification

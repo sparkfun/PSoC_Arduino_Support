@@ -2,7 +2,7 @@
 # This file copies everything you may need from your PSoC Creator Arduino Core
 #  project directory to some hardware directory located elsewhere on your
 #  computer (defined by the core variable).
-core=~/Dropbox/Projects/Hardware/SparkFun/psoc/cores/arduino
+core=~/Projects/Hardware/SparkFun/psoc/cores/arduino
 rm $core/* 2>/dev/null
 rm $core/core/*
 # First, we can just straight-up copy any header files...

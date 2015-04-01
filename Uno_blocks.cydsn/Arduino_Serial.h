@@ -6,7 +6,7 @@
 
 bool enableUSBCDC();
 void USBUART_FunctionAttach();
-void Serial1_FunctionAttach();
+void UART_FunctionAttach();
 
 #endif
 

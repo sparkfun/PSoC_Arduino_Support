@@ -2,7 +2,7 @@
 
 /* The clock input to the ResetCounter timer is 24MHz. By default, we want a
 *  10-second timeout before dumping the bootloader and going to the app. */
-#define TIMEOUT_PERIOD 240
+#define TIMEOUT_PERIOD 240000000UL
 //#define USE_UART
 int main()
 {

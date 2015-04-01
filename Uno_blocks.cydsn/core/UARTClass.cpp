@@ -102,11 +102,16 @@ int UARTClass::read( void )
 
 void UARTClass::flush( void )
 {
-  _myHelpers->blockForWriteComplete();
+  if (!_isUSB)
+  {
+    _myHelpers->blockForWriteComplete();
+  }
 }
 
 size_t UARTClass::write( const uint8_t uc_data )
 {
+  while (_myHelpers->blockForReadyToWrite() == 0)
+  { /* wait for the port to be ready */  }
   _myHelpers->sendData(const_cast<uint8_t*>(&uc_data), 1);
   return 1;
 }
