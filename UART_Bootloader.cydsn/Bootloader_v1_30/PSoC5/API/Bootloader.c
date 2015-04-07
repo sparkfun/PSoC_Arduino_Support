@@ -54,7 +54,7 @@ const uint32 CYCODE *Bootloader_SizeBytesAccess = (const uint32 CYCODE *)(&Bootl
 /***************************************
 *     Function Prototypes
 ***************************************/
-static void     Bootloader_HostLink(void);
+static void     Bootloader_HostLink(uint32 timeout);
 static void     Bootloader_LaunchApplication(void) CYSMALL;
 static void     Bootloader_LaunchBootloadable(uint32 appAddr);
 static char     BlockLoad(char mem, uint16 size, uint8* buffer, uint32 address);
@@ -96,7 +96,7 @@ static char     BlockLoad(char mem, uint16 size, uint8* buffer, uint32 address);
 *  will not return, instead it will simply hang the application.
 *
 *******************************************************************************/
-void Bootloader_Start(void) CYSMALL 
+void Bootloader_Start(uint32 timeout) CYSMALL 
 {
 
   if (CYRET_SUCCESS != CySetTemp())
@@ -107,7 +107,7 @@ void Bootloader_Start(void) CYSMALL
   if (Bootloader_GET_RUN_TYPE == Bootloader_START_BTLDR)
   {
       Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDR);
-      Bootloader_HostLink();
+      Bootloader_HostLink(timeout);
   }
 
   /* Schedule bootloadable application and perform software reset */
@@ -132,7 +132,6 @@ void Bootloader_Start(void) CYSMALL
 static void Bootloader_LaunchApplication(void) CYSMALL 
 {    
     Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDB);
-
     CySoftwareReset();
 }
 
@@ -155,18 +154,11 @@ static void Bootloader_LaunchApplication(void) CYSMALL
 *
 *******************************************************************************/
 void CyBtldr_CheckLaunch(void) CYSMALL 
-{
-  if (Bootloader_GET_RUN_TYPE == Bootloader_START_BTLDB)
-  {
-    Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDR);
-    CyDelay(750);
-    Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDB);
-    /* Never return from this method */
-    Bootloader_LaunchBootloadable(APPLICATION_START_ADDRESS);
-  }
+{  
+
 }
 
-__attribute__((noinline)) /* Workaround for GCC toolchain bug with inlining */
+__attribute__((noinline)) // Workaround for GCC toolchain bug with inlining
 __attribute__((naked))
 static void Bootloader_LaunchBootloadable(uint32 appAddr)
 {
@@ -191,12 +183,13 @@ static void Bootloader_LaunchBootloadable(uint32 appAddr)
 *   None
 *
 *******************************************************************************/
-static void Bootloader_HostLink(void) 
+static void Bootloader_HostLink(uint32 timeout) 
 {
   uint16    CYDATA numberRead;
   cystatus  CYDATA readStat;
   uint16    bytesToRead;
   uint16    bytesToWrite;  
+  uint32    counterVal;
   
   static const uint8 deviceID[7] = {'A','V','R','B', 'O', 'O', 'T'};
   static const uint8 swID[2] = {'1', '0'};
@@ -208,7 +201,7 @@ static void Bootloader_HostLink(void)
 
   /* Initialize communications channel. */
   CyBtldrCommStart();
-  
+  counterVal = 0;
   do
   {
     do
@@ -217,13 +210,24 @@ static void Bootloader_HostLink(void)
                                  Bootloader_SIZEOF_COMMAND_BUFFER,
                                  &numberRead,
                                  10);
-      if ((ResetCounter_ReadStatusRegister() & 0x01) != 0)
-      {
+      counterVal = Reset_Timer_ReadCounter() * -1;
+      #ifdef USE_UART
+      char dbstring[24];
+      sprintf(dbstring,"%ld\r", counterVal);
+      UART_PutString(dbstring);
+      CyDelay(50);
+      #endif
+      if (counterVal >= timeout)
+      {    
         Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDB);
         CySoftwareReset();
       }
     } while ( readStat != CYRET_SUCCESS );
 
+    Reset_Timer_Stop();
+    Reset_Timer_WriteCounter(0);
+    Reset_Timer_Start();
+    
     switch(packetBuffer[0])
     {
     /*************************************************************************
@@ -270,8 +274,6 @@ static void Bootloader_HostLink(void)
       *   assume that the app is valid b/c it was checked as it was being
       *   uploaded. */
       Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDB);
-      /* Hack to put the app start info at the right place in the metadata */
-      
       packetBuffer[0] = '\r';
       CyBtldrCommWrite(packetBuffer, 1, NULL, 0);
       while (USBUART_CDCIsReady() == 0)
@@ -393,9 +395,7 @@ static void Bootloader_HostLink(void)
       CyBtldrCommWrite(packetBuffer, 1, NULL, 0);
       break;
     }
-  } while ((ResetCounter_ReadStatusRegister() & 0x01) == 0);      
-  Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDB);
-  CySoftwareReset();
+  } while (1);
 }
 
 /*******************************************************************************

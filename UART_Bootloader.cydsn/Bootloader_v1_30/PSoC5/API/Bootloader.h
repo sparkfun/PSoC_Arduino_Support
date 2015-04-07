@@ -19,17 +19,19 @@
 
 #include "cytypes.h"
 #include "CyFlash.h"
-  
-#define APPLICATION_START_ADDRESS 0x00002411
+
+    
+#define APPLICATION_START_ADDRESS 0x00002811 
 
 /*******************************************************************************
 * Bootloadable applications identification
 *******************************************************************************/
 /* Mask used to indicate starting application */
-#define Bootloader_SCHEDULE_BTLDB             (0xC0u)
-#define Bootloader_SCHEDULE_BTLDR             (0x00u)
-#define Bootloader_START_BTLDB                (0xC0u)
-#define Bootloader_START_BTLDR                (0x00u)
+#define Bootloader_SCHEDULE_BTLDB             (0x80u)
+#define Bootloader_NEW_BOOT                   (0x00u)
+#define Bootloader_SCHEDULE_BTLDR             (0x40u)
+#define Bootloader_START_BTLDB                (0x80u)
+#define Bootloader_START_BTLDR                (0x40u)
 #define Bootloader_SCHEDULE_MASK              (0xC0u)
 
 __attribute__((section (".bootloader")))
@@ -39,7 +41,6 @@ extern const uint8  CYCODE  *Bootloader_ChecksumAccess;
 __attribute__((section (".bootloader")))
 extern const uint32 CYCODE Bootloader_SizeBytes;
 extern const uint32 CYCODE *Bootloader_SizeBytesAccess;
-
 
 /*******************************************************************************
 * This variable is used by Bootloader/Bootloadable components to schedule what
@@ -72,7 +73,7 @@ extern const uint32 CYCODE *Bootloader_SizeBytesAccess;
 *******************************************************************************/
 void Bootloader_SetFlashByte(uint32 address, uint8 runType);
 void CyBtldr_CheckLaunch(void)  CYSMALL ;
-void Bootloader_Start(void) CYSMALL ;
+void Bootloader_Start(uint32 timeout) CYSMALL ;
 void Bootloader_Exit(uint8 appId) CYSMALL ;
 
 #if(CY_PSOC3)

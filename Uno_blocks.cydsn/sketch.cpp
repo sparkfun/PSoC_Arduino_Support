@@ -3,7 +3,20 @@
 #include <SFE_MicroOLED.h>  // Include the SFE_MicroOLED library
 #include<math.h>
 
+void setup()
+{
+  Serial1.begin(19200);
+  Serial1.println("Hello, world!");
+}
 
+void loop()
+{
+  delay(750);
+  Serial1.println(millis());
+  Serial1.println(micros());
+}
+
+#if 0
 //////////////////////////
 // MicroOLED Definition //
 //////////////////////////
@@ -92,7 +105,7 @@ void drawCube()
   oled.line(p2x[3],p2y[3],p2x[7],p2y[7]);
   oled.display();
 }
-
+#endif
 #if 0
 #include "APDS9960.h"
 

@@ -3,28 +3,60 @@
 /* The clock input to the ResetCounter timer is 24MHz. By default, we want a
 *  10-second timeout before dumping the bootloader and going to the app. */
 #define TIMEOUT_PERIOD 240000000UL
+
+// This is a debug measure that allows the user to watch the traffic from the
+//  bootloader host program to the bootloader application.
 //#define USE_UART
-int main()
+
+static void     Bootloader_LaunchBootloadable(uint32 appAddr);
+
+__attribute__((noinline)) // Workaround for GCC toolchain bug with inlining
+__attribute__((naked))
+static void Bootloader_LaunchBootloadable(uint32 appAddr)
 {
+    __asm volatile("    BX  R0\n");
+}
+
+int main()
+{    
+  // This should hit if we're on a power-on reset, or external reset.
+  if ( Bootloader_GET_RUN_TYPE == Bootloader_NEW_BOOT ) 
+  {
+    Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDB);
+    Bootloader_LaunchBootloadable(APPLICATION_START_ADDRESS);
+  }
+  // This should hit only if a software reset was issued.
+  else if ( Bootloader_GET_RUN_TYPE == Bootloader_START_BTLDB )
+  {
+    Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDR);
+    CyDelay(750);
+    Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDB);
+    Bootloader_LaunchBootloadable(APPLICATION_START_ADDRESS);
+  }  
+  // If we're here for a reason, just stay in the bootloader.
+  else if ( (Bootloader_GET_RUN_TYPE == Bootloader_START_BTLDR) )
+  {/* don't do squat */}
+  
+  // This delay gives the host time to notice that the com port has disappeared
+  //  and reappeared. That causes AVRDUDE to "notice" it. Oddly, if the port
+  //  doesn't disappear for a blip, AVRDUDE will look right past the com port
+  //  for several seconds before actually trying to access it.
+  CyDelay(750);
+  
   CyGlobalIntEnable;
   
-  //char testString[128];
-  //sprintf(testString, "I am the very model of a modern major general");
-
 	/* Initialize PWM */
   PWM_Start();  
-  ResetCounter_Start();
-  ResetCounter_WriteCompare(TIMEOUT_PERIOD);
+  Reset_Timer_WriteCounter(0);
+  Reset_Timer_Start();
   #ifdef USE_UART
   UART_Start();
   #endif
-  
-  //UART_PutString(testString);
-	
+    	
 	/* This API does the entire bootload operation. After a succesful bootload 
   *   operation, this API transfers program control to the new application via 
   *   a software reset */
-	Bootloader_Start();
+	Bootloader_Start(TIMEOUT_PERIOD);
 	
 	/* CyBtldr_Start() API does not return – it ends with a software device reset. So, the code 
 	   after this API call (below) is never executed. */
