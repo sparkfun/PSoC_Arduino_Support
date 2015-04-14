@@ -15,6 +15,9 @@
   
 #include <stdint.h>
 #include <Project.h>
+#include <Arduino_Extended_IO.h>
+  
+    #define NUM_BASE_PINS 20
     
     #define D0 0
     #define D1 1
@@ -25,7 +28,7 @@
     #define D6 6
     #define D7 7
     #define D8 8
-    #define D9 9
+    #define D9 9  
     #define D10 10
     #define D11 11
     #define D12 12

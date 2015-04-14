@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef FONT7SEGMENT_H
 #define FONT7SEGMENT_H
 
-#include <core/pgmspace.h>
+#include <avr/pgmspace.h>
 
 static const unsigned char sevensegment [] PROGMEM = {
 	// first row defines - FONTWIDTH, FONTHEIGHT, ASCII START CHAR, TOTAL CHARACTERS, FONT MAP WIDTH HIGH, FONT MAP WIDTH LOW (2,56 meaning 256)

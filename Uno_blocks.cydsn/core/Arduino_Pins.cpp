@@ -2,13 +2,17 @@ extern "C" {
 #include <Project.h>
 }
 
-
 #include <Arduino_Pins.h>
+#include <Arduino_Extended_IO.h>
 
 void (*pinWriteFuncs[20])(uint8_t level);
 uint8_t (*pinReadFuncs[20])();
 void (*pinModeFuncs[20])(uint8_t driveMode);
 void (*pinBypassFuncs[20])(enum BYPASS_MODE enableBypass);
+
+extern void (*extendedPinWrite[NUM_EXTENDED_PINS])(uint8_t level);
+extern uint8_t (*extendedPinRead[NUM_EXTENDED_PINS])();
+extern void (*extendedPinMode[NUM_EXTENDED_PINS])(uint8_t driveMode);
 
 void pinFuncInit()
 {
@@ -107,17 +111,38 @@ void pinFuncInit()
     
 void digitalWrite(uint8_t pin, uint8_t level)
 {
+    if (pin > 19)
+    {
+      extendedPinWrite[pin-20](level);
+    }
     pinWriteFuncs[pin](level);
 }
     
 uint8_t digitalRead(uint8_t pin)
 {
+    if (pin > 19)
+    {
+      return extendedPinRead[pin-20]();
+    }
     return pinReadFuncs[pin]();
 }
 
 void pinMode(uint8_t pin, enum PIN_MODE mode)
 {
-    pinBypassFuncs[pin](PIN_DISABLE_BYPASS);
+    if ( pin > 19 )
+    {
+      pin-=20;
+      if ( ( mode != OUTPUT ) &&
+           ( mode != INPUT_PULLUP ) &&
+           ( mode != INPUT ) )
+      {
+        return;
+      }
+    }
+    else
+    {
+      pinBypassFuncs[pin](PIN_DISABLE_BYPASS);
+    }
     switch(mode)
     {
         case OUTPUT:

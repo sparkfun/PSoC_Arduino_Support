@@ -36,15 +36,15 @@ void tone(uint8_t pin, uint16_t freq, uint32_t duration)
     pinMode(pin, OUTPUT);
     toneLength = duration;
     toneStart = millis();
-    Timer1_Start();
+    ToneTimer_Start();
     uint32_t period = 1000000/freq;
-    Timer1_WritePeriod((uint16_t)period);
+    ToneTimer_WritePeriod((uint16_t)period);
 }
 
 void noTone(uint8_t pin)
 {
     if (pin != tonePin) return;
-    Timer1_Stop();
+    ToneTimer_Stop();
     digitalWrite(tonePin, LOW);
     tonePin = 255;
 }
@@ -55,7 +55,7 @@ CY_ISR(ToneInterruptHandler)
     digitalWrite(tonePin, 0x01 ^ digitalRead(tonePin));
     if (toneLength == 0) return;
     toneElapsed = millis() - toneStart;
-    if (toneLength <= toneElapsed) Timer1_Stop();
+    if (toneLength <= toneElapsed) ToneTimer_Stop();
     tonePin = 255;
 }
 
