@@ -1,7 +1,5 @@
 extern "C" {
-
 #include <project.h>
-
 }
 
 #include "Arduino.h"
@@ -27,30 +25,29 @@ void exitToBootloader(void);
 int main()
 {
     
-    CyGlobalIntEnable;  
-    Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDB);
-    USBUART_FunctionAttach();
-    enableUSBCDC();
-    UART_FunctionAttach();
-    initTimebase();
-    pinFuncInit();
+  CyGlobalIntEnable;  
+  Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDB);
+  USBUART_FunctionAttach();
+  //enableUSBCDC();
+  UART_FunctionAttach();
+  initTimebase();
+  
+  setup();
     
-    setup();
-      
-    for(;;)
-    {
-      loop();
-      if (Serial)
+  for(;;)
+  {
+    loop();
+    if (Serial)
+      {
+      if (USBUART_IsLineChanged())
+      {
+        if (USBUART_GetDTERate() == 1200)
         {
-        if (USBUART_IsLineChanged())
-        {
-          if (USBUART_GetDTERate() == 1200)
-          {
-            exitToBootloader();
-          }
+          exitToBootloader();
         }
       }
     }
+  }
 }
 
 

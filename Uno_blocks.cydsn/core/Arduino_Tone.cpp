@@ -9,11 +9,13 @@
  *
  * ========================================
 */
+extern "C" {
+#include <project.h>
+}
 
 #include <Arduino_Tone.h>
 #include <Arduino_Time.h>
 #include <Arduino_Pins.h>
-#include <Project.h>
 
 volatile uint8_t  tonePin;          // What pin are we playing the note on?
 volatile uint32_t toneLength;       // How long should the tone last?

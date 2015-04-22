@@ -22,6 +22,8 @@ int main()
   // This should hit if we're on a power-on reset, or external reset.
   if ( Bootloader_GET_RUN_TYPE == Bootloader_NEW_BOOT ) 
   {
+    Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDR);
+    CyDelay(750);
     Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDB);
     Bootloader_LaunchBootloadable(APPLICATION_START_ADDRESS);
   }

@@ -1,21 +1,232 @@
 #include "Arduino.h"
-#include <SPI.h>  // Include SPI if you're using SPI
-#include <SFE_MicroOLED.h>  // Include the SFE_MicroOLED library
-#include<math.h>
+
+#include <Servo.h>
+
+Servo servoMotor0;
+Servo servoMotor1;
+Servo servoMotor2;
+Servo servoMotor3;
+Servo servoMotor4;
+Servo servoMotor5;
+Servo servoMotor6;
+Servo servoMotor7;
+Servo servoMotor8;
+Servo servoMotor9;
+Servo servoMotor10;
+Servo servoMotor11;
+Servo servoMotor12;
+Servo servoMotor13;
+Servo servoMotor14;
+Servo servoMotor15;
+Servo servoMotor16;
+Servo servoMotor17;
+Servo servoMotor18;
+Servo servoMotor19;
+Servo servoMotor20;
+Servo servoMotor21;
+Servo servoMotor22;
+Servo servoMotor23;
 
 void setup()
 {
-  Serial1.begin(19200);
-  Serial1.println("Hello, world!");
+  pinMode(D4, OUTPUT);
+  pinMode(D5, OUTPUT);
+  digitalWrite(D5, LOW);
+  digitalWrite(D5, HIGH);
+  digitalWrite(D5, LOW);
+  servoMotor0.attach(P0_D0, 700, 2300);
+  servoMotor1.attach(P0_D1, 750, 2300);
+  servoMotor2.attach(P0_D2, 750, 2300);
+  servoMotor3.attach(P0_D3, 750, 2300);
+  servoMotor4.attach(P0_D4, 750, 2300);
+  servoMotor5.attach(P0_D5, 750, 2300);
+  servoMotor6.attach(P0_D6, 750, 2300);
+  servoMotor7.attach(P0_D7, 750, 2300);
+  servoMotor8.attach(P3_D0, 750, 2300);
+  servoMotor9.attach(P3_D1, 750, 2300);
+  servoMotor10.attach(P3_D2, 750, 2300);
+  servoMotor11.attach(P3_D3, 750, 2300);
+  servoMotor12.attach(P3_D4, 750, 2300);
+  servoMotor13.attach(P3_D5, 750, 2300);
+  servoMotor14.attach(P3_D6, 750, 2300);
+  servoMotor15.attach(P3_D7, 750, 2300);
+  servoMotor16.attach(P5_D0, 750, 2300);
+  servoMotor17.attach(P5_D1, 750, 2300);
+  servoMotor18.attach(P5_D2, 750, 2300);
+  servoMotor19.attach(P5_D3, 750, 2300);
+  servoMotor20.attach(P5_D4, 750, 2300);
+  servoMotor21.attach(P5_D5, 750, 2300);
+  servoMotor22.attach(P5_D6, 750, 2300);
+  servoMotor23.attach(P5_D7, 750, 2300);
 }
 
 void loop()
 {
-  delay(750);
-  Serial1.println(millis());
-  Serial1.println(micros());
+  servoMotor0.write(0);
+  servoMotor1.write(0);
+  servoMotor2.write(0);
+  servoMotor3.write(0);
+  servoMotor4.write(0);
+  servoMotor5.write(0);
+  servoMotor6.write(0);
+  servoMotor7.write(0);
+  servoMotor8.write(0);
+  servoMotor9.write(0);
+  servoMotor10.write(0);
+  servoMotor11.write(0);
+  servoMotor12.write(0);
+  servoMotor13.write(0);
+  servoMotor14.write(0);
+  servoMotor15.write(0);
+  servoMotor16.write(0);
+  servoMotor17.write(0);
+  servoMotor18.write(0);
+  servoMotor19.write(0);
+  servoMotor20.write(0);
+  servoMotor21.write(0);
+  servoMotor22.write(0);
+  servoMotor23.write(0);
+  delay(2000);
+  servoMotor0.write(180);
+  servoMotor1.write(180);
+  servoMotor2.write(180);
+  servoMotor3.write(180);
+  servoMotor4.write(180);
+  servoMotor5.write(180);
+  servoMotor6.write(180);
+  servoMotor7.write(180);
+  servoMotor8.write(180);
+  servoMotor9.write(180);
+  servoMotor10.write(180);
+  servoMotor11.write(180);
+  servoMotor12.write(180);
+  servoMotor13.write(180);
+  servoMotor14.write(180);
+  servoMotor15.write(180);
+  servoMotor16.write(180);
+  servoMotor17.write(180);
+  servoMotor18.write(180);
+  servoMotor19.write(180);
+  servoMotor20.write(180);
+  servoMotor21.write(180);
+  servoMotor22.write(180);
+  servoMotor23.write(180);
+  
+  delay(2000);
 }
 
+#if 0
+#include <SPI.h>  // Include SPI if you're using SPI
+#include <WiFi.h>
+
+void printMacAddress();
+void listNetworks();
+void printEncryptionType(int thisType);
+
+void setup() {
+  //Initialize serial and wait for port to open:
+  Serial1.begin(9600);
+  SPI.begin();
+  while (!Serial1) {
+    ; // wait for serial port to connect. Needed for Leonardo only
+  }
+  
+  delay(1200);
+
+  // check for the presence of the shield:
+  if (WiFi.status() == WL_NO_SHIELD) {
+    Serial1.println("WiFi shield not present");
+    // don't continue:
+    while (true);
+  }
+
+  String fv = WiFi.firmwareVersion();
+  if ( fv != "1.1.0" )
+    Serial1.println("Please upgrade the firmware");
+
+  // Print WiFi MAC address:
+  printMacAddress();
+
+  // scan for existing networks:
+  Serial1.println("Scanning available networks...");
+  listNetworks();
+}
+
+void loop() {
+  delay(10000);
+  // scan for existing networks:
+  Serial1.println("Scanning available networks...");
+  listNetworks();
+}
+
+void printMacAddress() {
+  // the MAC address of your Wifi shield
+  byte mac[6];
+
+  // print your MAC address:
+  WiFi.macAddress(mac);
+  Serial1.print("MAC: ");
+  Serial1.print(mac[5], HEX);
+  Serial1.print(":");
+  Serial1.print(mac[4], HEX);
+  Serial1.print(":");
+  Serial1.print(mac[3], HEX);
+  Serial1.print(":");
+  Serial1.print(mac[2], HEX);
+  Serial1.print(":");
+  Serial1.print(mac[1], HEX);
+  Serial1.print(":");
+  Serial1.println(mac[0], HEX);
+}
+
+void listNetworks() {
+  // scan for nearby networks:
+  Serial1.println("** Scan Networks **");
+  int numSsid = WiFi.scanNetworks();
+  if (numSsid == -1)
+  {
+    Serial1.println("Couldn't get a wifi connection");
+    while (true);
+  }
+
+  // print the list of networks seen:
+  Serial1.print("number of available networks:");
+  Serial1.println(numSsid);
+
+  // print the network number and name for each network found:
+  for (int thisNet = 0; thisNet < numSsid; thisNet++) {
+    Serial1.print(thisNet);
+    Serial1.print(") ");
+    Serial1.print(WiFi.SSID(thisNet));
+    Serial1.print("\tSignal: ");
+    Serial1.print(WiFi.RSSI(thisNet));
+    Serial1.print(" dBm");
+    Serial1.print("\tEncryption: ");
+    printEncryptionType(WiFi.encryptionType(thisNet));
+  }
+}
+
+void printEncryptionType(int thisType) {
+  // read the encryption type and print out the name:
+  switch (thisType) {
+    case ENC_TYPE_WEP:
+      Serial1.println("WEP");
+      break;
+    case ENC_TYPE_TKIP:
+      Serial1.println("WPA");
+      break;
+    case ENC_TYPE_CCMP:
+      Serial1.println("WPA2");
+      break;
+    case ENC_TYPE_NONE:
+      Serial1.println("None");
+      break;
+    case ENC_TYPE_AUTO:
+      Serial1.println("Auto");
+      break;
+  }
+}
+#endif
 #if 0
 //////////////////////////
 // MicroOLED Definition //

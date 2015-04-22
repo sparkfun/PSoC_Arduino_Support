@@ -9,8 +9,10 @@
  *
  * ========================================
 */
-
+extern "C" {
 #include <project.h>
+}
+
 #include <Arduino_Analog_In.h>
 
 void initAnalogInput()

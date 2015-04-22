@@ -3,12 +3,13 @@
 <!--This file is machine generated and read. It is not intended to be edited by hand.-->
 <!--Due to this, there is no schema for this file.-->
 <CyGuid_2867d519-54d2-4c01-9830-c51cb08bc3dd type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspc" version="5" xml_contents_version="3" name="Arduino_Support" persistent="" platform="NOT_USED">
-<current_project name=".\Bootloader.cydsn\Bootloader.cyprj" />
+<current_project name=".\Uno_blocks.cydsn\Uno_blocks.cyprj" />
 <wrkspc_folders />
 <files />
 <projects>
 <v>.\Uno_blocks.cydsn\Uno_blocks.cyprj</v>
 <v>.\Bootloader.cydsn\Bootloader.cyprj</v>
+<v>.\Counter01.cydsn\Counter01.cyprj</v>
 </projects>
 <workspace_id v="c1026b1c-b0a8-4d73-bba5-b451638532a5" />
 <WriteAppVersionLastSavedWith v="3.1.0.2177" />

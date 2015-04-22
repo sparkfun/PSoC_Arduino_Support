@@ -1,7 +1,6 @@
 /*
-  dtostrf - Emulation for dtostrf function from avr-libc
-  Copyright (c) 2013 Arduino.  All rights reserved.
-  Written by Cristian Maglie <c.maglie@arduino.cc>
+  wl_types.h - Library for Arduino Wifi shield.
+  Copyright (c) 2011-2014 Arduino.  All right reserved.
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -17,20 +16,34 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+/*
+ * wl_types.h
+ *
+ *  Created on: Jul 30, 2010
+ *      Author: dlafauci
+ */
 
-#include <stdio.h>
 
-#ifdef __cplusplus
-extern "C"   {
-#endif
+#ifndef	_WL_TYPES_H_
+#define	_WL_TYPES_H_
 
-char *dtostrf (double val, signed char width, unsigned char prec, char *sout) {
-  char fmt[20];
-  sprintf(fmt, "%%%d.%df", width, prec);
-  sprintf(sout, fmt, val);
-  return sout;
-}
+#include <inttypes.h>
 
-#ifdef __cplusplus
-}
-#endif
+typedef enum {
+        WL_FAILURE = -1,
+        WL_SUCCESS = 1,
+} wl_error_code_t;
+
+/* Authentication modes */
+enum wl_auth_mode {
+        AUTH_MODE_INVALID,
+        AUTH_MODE_AUTO,
+        AUTH_MODE_OPEN_SYSTEM,
+        AUTH_MODE_SHARED_KEY,
+        AUTH_MODE_WPA,
+        AUTH_MODE_WPA2,
+        AUTH_MODE_WPA_PSK,
+        AUTH_MODE_WPA2_PSK
+};
+
+#endif //_WL_TYPES_H_

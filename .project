@@ -129,7 +129,6 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     Arduino_Advanced_IO.cpp
     Arduino_Analog_In.cpp
     Arduino_Analog_Out.cpp
-    Arduino_Extended_IO.cpp
     Arduino_HW_Interrupt.cpp
     Arduino_Pins.cpp
     Arduino_Random.cpp
@@ -141,6 +140,7 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     UARTClass.cpp
     WString.cpp
     itoa.c
+    Arduino_Math.cpp
      }
      AVR=avr filter="*.h *.cpp *.c" {
     dtostrf.h
@@ -148,6 +148,21 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     dtostrf.c
      }
    }
+   Libraries=Libraries filter="NULL"{
+    Servo=Servo filter="*.h *.cpp *.c"{
+    Servo.h
+    Servo.cpp
+    }
+    SPI=SPI filter="*.h *.cpp *.c"{
+    SPI.h
+    SPI.cpp
+    }
+    Wire=Wire filter="*.h *.cpp *.c"{
+    Arduino_I2C.h
+    Wire.h
+    Arduino_I2C.cpp
+    }  
+ }
    Generated=Generated_Source/PSoC5 filter="NULL"{
     Headers=. filter="*.h" {
     A0.h

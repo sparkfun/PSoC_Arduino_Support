@@ -1,22 +1,10 @@
-/* ========================================
- *
- * Copyright YOUR COMPANY, THE YEAR
- * All Rights Reserved
- * UNPUBLISHED, LICENSED SOFTWARE.
- *
- * CONFIDENTIAL AND PROPRIETARY INFORMATION
- * WHICH IS THE PROPERTY OF your company.
- *
- * ========================================
-*/
-
 extern "C" {
 #include <Project.h>
 }
 
 #include <stdint.h>
 #include "Arduino_Advanced_IO.h"
-#include "Arduino_Pins.h"
+#include <Arduino.h>
 #include "Arduino_Time.h"
 
 uint32_t pulseIn(uint8_t pin, uint8_t level, uint32_t timeout)

@@ -129,8 +129,8 @@ bool UART_CustomPortEnable(void)
 void UART_CustomPortDisable(void)
 {
   UART_Stop();
-  D0_Bypass(PIN_DISABLE_BYPASS);
-  D1_Bypass(PIN_DISABLE_BYPASS); 
+  pinMode(D0, INPUT);
+  pinMode(D1, INPUT);
 }
 
 uint16_t UART_GetDataArray(uint8_t* buffer, uint8_t size)

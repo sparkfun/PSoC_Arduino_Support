@@ -1,14 +1,3 @@
-/* ========================================
- *
- * Copyright YOUR COMPANY, THE YEAR
- * All Rights Reserved
- * UNPUBLISHED, LICENSED SOFTWARE.
- *
- * CONFIDENTIAL AND PROPRIETARY INFORMATION
- * WHICH IS THE PROPERTY OF your company.
- *
- * ========================================
-*/
 #ifndef __arduino_h_
 #define __arduino_h_
   
@@ -16,7 +5,8 @@
 #define byte uint8_t
 #define PI 3.1415
 #define _BV(bit) (1 << (bit))
-  
+#define F_CPU 16000000L
+
 extern "C" {
 #include <project.h>
 }
@@ -34,9 +24,11 @@ extern "C" {
 #include "UARTClass.h"
 #include "Stream.h"
 #include "avr/pgmspace.h"
+#include "Arduino_Extended_IO.h"
 
 void setup();
 void loop();
+long map(long, long, long, long, long);
 
 extern UARTClass Serial;
 extern UARTClass Serial1;
