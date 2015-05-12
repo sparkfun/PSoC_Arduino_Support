@@ -2,8 +2,8 @@
 # This file copies everything you may need from your PSoC Creator Arduino Core
 #  project directory to some hardware directory located elsewhere on your
 #  computer (defined by the core variable).
-core=/cygdrive/c/dropbox/Projects/Hardware/SparkFun/psoc/cores/arduino
-
+core=../Hardware/SparkFun/psoc/cores/arduino
+sketchbook=/cygdrive/c/dropbox/Projects
 # Delete the contents of that directory.
 rm $core/* -rf 2>/dev/null
 
@@ -30,16 +30,13 @@ cp main.cpp $core/
 cp Libraries/SPI $core/../../libraries/ -r
 cp Libraries/Wire $core/../../libraries/ -r
 cp Libraries/Servo $core/../../libraries/ -r
+cp Libraries/WS281x $core/../../libraries/ -r
 
 # These are the generated files that PSoC Creator normally builds with. We
 #  need header files, c files (*not* cpp!) and the linker (ld) file.
 cp ./codegentemp/*.h $core/
-#cp ./codegentemp/*.c $core/
 cp ./codegentemp/Cm3Start.c $core/
 cp ./codegentemp/*.ld $core/
-#find ./codegentemp -maxdepth 1 -name "*.c" -exec cp "{}" "$core/" \;
-#find ./codegentemp -maxdepth 1 -name "*.h" -exec cp "{}" "$core/" \;
-#find ./codegentemp -maxdepth 1 -name "*.ld" -exec cp "{}" "$core/" \;
 
 cp ./CortexM3/ARM_GCC_484/Release/Uno_blocks.a $core/../../variants/standard/
 
@@ -54,3 +51,5 @@ find ./codegentemp -maxdepth 1 -name "*nu.s" |\
 find ./codegentemp -maxdepth 1 -name "*nu*inc" -exec cp "{}" "$core/" \;
 
 chmod -R 777 $core/../../*
+cp $core/ $sketchbook/ -r
+

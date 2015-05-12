@@ -65,11 +65,8 @@
 #include <ServoCounter.h>
 #include <BootloaderResetTimer.h>
 #include <BootloaderResetInterrupt.h>
-#include <StartTransfer.h>
-#include <Pin_1_aliases.h>
-#include <Pin_1.h>
-#include <DataByte.h>
-#include <WS2812_DCLK.h>
+#include <WSDriver.h>
+#include <WSDriver_fonts.h>
 #include <Clock_2.h>
 #include <Bootloadable.h>
 #include <ADC_IRQ.h>
@@ -78,6 +75,10 @@
 #include <USBUART_Dm.h>
 #include <USBUART_Dp_aliases.h>
 #include <USBUART_Dp.h>
+#include <WSDriver_Clock.h>
+#include <WSDriver_StringSel.h>
+#include <WSDriver_fisr.h>
+#include <WSDriver_cisr.h>
 #include <core_cm3_psoc5.h>
 #include <core_cm3.h>
 #include <CyDmac.h>

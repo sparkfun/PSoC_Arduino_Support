@@ -22,7 +22,6 @@ int main()
   enableUSBCDC();
   UART_FunctionAttach();
   initTimebase();
-  DataByte_Start();
   
   setup();
     
