@@ -1,6 +1,6 @@
 /*******************************************************************************
 * File Name: .h
-* Version 3.40
+* Version 3.50
 *
 * Description:
 *  This file provides private constants and parameter values for the I2C

@@ -1,6 +1,6 @@
 /*******************************************************************************
 * File Name: PWM_1.h
-* Version 3.20
+* Version 3.30
 *
 * Description:
 *  Contains the prototypes and constants for the functions available to the
@@ -60,7 +60,7 @@ extern uint8 PWM_1_initVar;
 /* Check to see if required defines such as CY_PSOC5LP are available */
 /* They are defined starting with cy_boot v3.0 */
 #if !defined (CY_PSOC5LP)
-    #error Component PWM_v3_20 requires cy_boot v3.0 or later
+    #error Component PWM_v3_30 requires cy_boot v3.0 or later
 #endif /* (CY_ PSOC5LP) */
 
 /* Use Kill Mode Enumerated Types */

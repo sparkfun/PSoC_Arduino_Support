@@ -167,9 +167,9 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     Wire.h
     Arduino_I2C.cpp
     }  
-    NeoPixel=NeoPixel filter="*.h *.cpp *.c"{
-    NeoPixel.h
-    NeoPixel.cpp
+    WS281x=WS281x filter="*.h *.cpp *.c"{
+    WS281x.h
+    WS281x.cpp
     }  
  }
    Generated=Generated_Source/PSoC5 filter="NULL"{

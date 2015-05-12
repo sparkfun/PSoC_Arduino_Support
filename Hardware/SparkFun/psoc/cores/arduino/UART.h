@@ -1,6 +1,6 @@
 /*******************************************************************************
 * File Name: UART.h
-* Version 2.40
+* Version 2.50
 *
 * Description:
 *  Contains the function prototypes and constants available to the UART
@@ -51,7 +51,7 @@
 /* Check to see if required defines such as CY_PSOC5LP are available */
 /* They are defined starting with cy_boot v3.0 */
 #if !defined (CY_PSOC5LP)
-    #error Component UART_v2_40 requires cy_boot v3.0 or later
+    #error Component UART_v2_50 requires cy_boot v3.0 or later
 #endif /* (CY_PSOC5LP) */
 
 #if defined(UART_BUART_sCR_SyncCtl_CtrlReg__CONTROL_REG)
@@ -182,7 +182,7 @@ void UART_Wakeup(void) ;
     #define UART_BYTE2BYTE_TIME_OUT (25u)
     #define UART_PACKET_EOP         (0x17u) /* End of packet defined by bootloader */
     #define UART_WAIT_EOP_DELAY     (5u)    /* Additional 5ms to wait for End of packet */
-    #define UART_WAIT_1_MS          (1u)    /* Time Out quantity equal 1mS */
+    #define UART_BL_CHK_DELAY_MS    (1u)    /* Time Out quantity equal 1mS */
 
 #endif /* CYDEV_BOOTLOADER_IO_COMP */
 
@@ -498,6 +498,8 @@ extern uint8 UART_initVar;
 ***************************************/
 
 /* UART v2_40 obsolete definitions */
+#define UART_WAIT_1_MS      UART_BL_CHK_DELAY_MS   
+
 #define UART_TXBUFFERSIZE   UART_TX_BUFFER_SIZE
 #define UART_RXBUFFERSIZE   UART_RX_BUFFER_SIZE
 

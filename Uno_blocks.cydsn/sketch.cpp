@@ -1,7 +1,7 @@
 #include "Arduino.h"
-#include <NeoPixel.h>
+#include <WS281x.h>
 
-NeoPixel pixels(4, 0);
+WS281x pixels(1, 0);
 
 void setup() 
 {
@@ -11,10 +11,19 @@ void setup()
 void loop() 
 {		
   pixels.setPixelColor(0, 0, 0, 0);
-  pixels.show();
+  pixels.refresh();
   delay(1000);
   pixels.setPixelColor(0, 255, 255, 255);
-  pixels.show();
+  pixels.refresh();
+  delay(1000);
+  pixels.setPixelColor(0, 255, 0, 0);
+  pixels.refresh();
+  delay(1000);
+  pixels.setPixelColor(0, 0, 255, 0);
+  pixels.refresh();
+  delay(1000);
+  pixels.setPixelColor(0, 0, 0, 255);
+  pixels.refresh();
   delay(1000);
 }
 
