@@ -42,14 +42,16 @@ compiler.cpp.extra_flags=
 compiler.ar.extra_flags=
 compiler.elf2hex.extra_flags=
 
+local_libraries="{runtime.hardware.path}/psoc/Libraries/"
+
 ## Compile c files
-recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}"  {compiler.c.flags}  {compiler.c.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
+recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}"  {compiler.c.flags}  {compiler.c.extra_flags} {build.extra_flags} -I{local_libraries} {includes} "{source_file}" -o "{object_file}"
 
 ## Compile c++ files
-recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags}  {compiler.cpp.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
+recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags}  {compiler.cpp.extra_flags} {build.extra_flags} -I{local_libraries} {includes} "{source_file}" -o "{object_file}"
 
 ## Assemble .S files
-recipe.S.o.pattern="{compiler.path}{compiler.S.cmd}" {compiler.S.flags} {includes} "{source_file}" -o "{object_file}"
+recipe.S.o.pattern="{compiler.path}{compiler.S.cmd}" {compiler.S.flags} -I{local_libraries} {includes} "{source_file}" -o "{object_file}"
 
 ## Create archives
 recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{build.path}/{archive_file}" "{object_file}"
