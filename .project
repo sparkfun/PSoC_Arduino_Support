@@ -117,12 +117,16 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     Arduino_Time.h
     Arduino_Tone.h
     binary.h
+    Client.h
     HardwareSerial.h
+    IPAddress.h
     itoa.h
     Print.h
     Printable.h
+    Server.h
     Stream.h
     UARTClass.h
+    Udp.h
     WString.h
      }
      Source=. filter="*.cpp *.c"{
@@ -130,17 +134,18 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     Arduino_Analog_In.cpp
     Arduino_Analog_Out.cpp
     Arduino_HW_Interrupt.cpp
+    Arduino_Math.cpp
     Arduino_Pins.cpp
     Arduino_Random.cpp
     Arduino_Serial.cpp
     Arduino_Time.cpp
     Arduino_Tone.cpp
+    IPAddress.cpp
     Print.cpp
     Stream.cpp
     UARTClass.cpp
     WString.cpp
     itoa.c
-    Arduino_Math.cpp
      }
      AVR=avr filter="*.h *.cpp *.c" {
     dtostrf.h
@@ -161,6 +166,10 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     Arduino_I2C.h
     Wire.h
     Arduino_I2C.cpp
+    }  
+    NeoPixel=NeoPixel filter="*.h *.cpp *.c"{
+    NeoPixel.h
+    NeoPixel.cpp
     }  
  }
    Generated=Generated_Source/PSoC5 filter="NULL"{
@@ -183,7 +192,11 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     ADC_IRQ.h
     ADC_Mux.h
     ADC_theACLK.h
+    A_aliases.h
     Bootloadable.h
+    BootloaderResetInterrupt.h
+    BootloaderResetTimer.h
+    Clock_12.h
     Clock_2.h
     Clock_3.h
     core_cm3.h
@@ -232,6 +245,9 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     D8_aliases.h
     D9.h
     D9_aliases.h
+    DA.h
+    DA_aliases.h
+    DB_aliases.h
     HW_INT.h
     I2C.h
     I2C_Enable.h
@@ -248,6 +264,8 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     PWM_1.h
     PWM_2.h
     PWM_3.h
+    ServoCounter.h
+    ServoInterrupt.h
     SPIM.h
     SPIM_1.h
     SPIM_1_PVT.h
@@ -256,6 +274,7 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     SPI_MODE_REG.h
     SPI_SS_Stretch.h
     Timer1.h
+    timer_clock.h
     ToneTimer.h
     Tone_Interrupt.h
     UART.h
@@ -288,6 +307,10 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     ADC_PM.c
     ADC_theACLK.c
     Bootloadable.c
+    BootloaderResetInterrupt.c
+    BootloaderResetTimer.c
+    BootloaderResetTimer_PM.c
+    Clock_12.c
     Clock_2.c
     Clock_3.c
     Cm3Start.c
@@ -318,6 +341,7 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     D7.c
     D8.c
     D9.c
+    DA.c
     HW_INT.c
     I2C.c
     I2C_BOOT.c
@@ -339,6 +363,9 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     PWM_2_PM.c
     PWM_3.c
     PWM_3_PM.c
+    ServoCounter.c
+    ServoCounter_PM.c
+    ServoInterrupt.c
     SPIM.c
     SPIM_1.c
     SPIM_1_INT.c
@@ -352,6 +379,7 @@ PSOC_Arduino_Support=~/PSoC_Creator/Arduino_Support CD=. filter="NULL"{
     SPI_SS_Stretch_PM.c
     Timer1.c
     Timer1_PM.c
+    timer_clock.c
     ToneTimer.c
     ToneTimer_PM.c
     Tone_Interrupt.c

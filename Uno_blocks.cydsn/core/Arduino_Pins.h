@@ -34,12 +34,15 @@
 #define A4 D18 
 #define A5 D19
 
+
 #define HIGH 1u
 #define LOW 0u
 
 enum PIN_MODE {OUTPUT, INPUT, INPUT_PULLUP, PERIPHERAL, PERIPHERAL_OUT,
                PERIPHERAL_IN, PERIPHERAL_OD};
 enum BYPASS_MODE {PIN_ENABLE_BYPASS = 0x80, PIN_DISABLE_BYPASS = 0x7f};
+
+extern uint32_t pinNameToPointers[NUM_BASE_PINS];
 
 void digitalWrite(uint32_t pin, uint8_t level);
 void pinMode(uint32_t pin, enum PIN_MODE mode);

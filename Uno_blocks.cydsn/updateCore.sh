@@ -27,7 +27,9 @@ cp ./core/* $core/ -r
 cp main.cpp $core/
 
 # And, libraries...
-cp Libraries/* $core/../../libraries/ -r
+cp Libraries/SPI $core/../../libraries/ -r
+cp Libraries/Wire $core/../../libraries/ -r
+cp Libraries/Servo $core/../../libraries/ -r
 
 # These are the generated files that PSoC Creator normally builds with. We
 #  need header files, c files (*not* cpp!) and the linker (ld) file.

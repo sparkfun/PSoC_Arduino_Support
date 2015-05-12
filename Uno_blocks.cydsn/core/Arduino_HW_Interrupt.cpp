@@ -18,7 +18,6 @@ void attachInterrupt(int interrupt, void (*isr)(), enum HW_INT_MODE mode)
 {
   uint8_t intStat = *(uint8_t*)CYREG_PICU2_INTSTAT;
   if (intStat == 0);
-  HW_INT_StartEx(HW_INT_ISR);
   if (interrupt == 0)
   {
     *(uint8_t*)CYREG_PICU2_INTTYPE2 = mode & 0x03;
@@ -29,6 +28,7 @@ void attachInterrupt(int interrupt, void (*isr)(), enum HW_INT_MODE mode)
     *(uint8_t*)CYREG_PICU2_INTTYPE3 = mode & 0x03;
     INT1Function = isr;
   }    
+  HW_INT_StartEx(HW_INT_ISR);
 }
 
 void detachInterrupt(int interrupt)

@@ -5,7 +5,6 @@ extern "C"
 #include <Arduino.h>
 #include <Servo.h>
 #include <Arduino_Pins.h>
-#include <Arduino_Extended_IO.h>
 
 
 volatile uint8_t pinStatus = LOW;
@@ -14,10 +13,9 @@ volatile uint16_t pulseLength = DEFAULT_PULSE_WIDTH;
 static servo_t servoList[MAX_SERVOS];
 static int8_t servoCount = 0;
 static int8_t activeServo = 0;
-uint32_t pinToPointer[NUM_BASE_PINS]= 
-  { D0, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10,
-    D11, D12, D13, D14, D15, D16, D17, D18, D19};
+extern uint32_t pinNumberToPointer[NUM_BASE_PINS]; 
 
+CY_ISR_PROTO(ServoInterrupt_ISR);
 CY_ISR(ServoInterrupt_ISR)
 {
   // Reading the status register clears the interrupt, so we *have* to do it.
@@ -28,19 +26,26 @@ CY_ISR(ServoInterrupt_ISR)
   {
     return;
   }
-
-  /* If a zero status interrupt occurred, we need to reset the active servo
-   * index to zero. */
+  
   if ( ( status & ServoCounter_STATUS_ZERO ) !=0 )
   {
     digitalWrite(D4, HIGH);
     digitalWrite(D4, LOW);
   }
 
+  /* If a zero status interrupt occurred, we need to reset the active servo
+   * index to zero. */
+
   if (activeServo == servoCount)
   {
     ServoCounter_WriteCompare(0);
     activeServo = 0;
+    return;
+  }
+
+  if (servoList[activeServo].Pin.isActive == false)
+  {
+    activeServo++;
     return;
   }
 
@@ -81,12 +86,12 @@ Servo::Servo()
 }
 
 
-uint8_t Servo::attach(int pin)             
+uint8_t Servo::attach(uint32_t pin)             
 {
   return this->attach(pin, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH);
 }
 
-uint8_t Servo::attach(int pin, int min, int max)
+uint8_t Servo::attach(uint32_t pin, int min, int max)
 {
   if ( (ServoCounter_ReadControlRegister() & 0x80) == 0 )
   {
@@ -96,11 +101,11 @@ uint8_t Servo::attach(int pin, int min, int max)
     ServoCounter_SetInterruptMode(ServoCounter_STATUS_CMP_INT_EN_MASK | ServoCounter_STATUS_ZERO_INT_EN_MASK);
     ServoInterrupt_StartEx(ServoInterrupt_ISR);
   }
-  if (this->servoIndex != 255)
+  if (this->servoIndex != INVALID_SERVO)
   {
     if ( (pin > 0 ) && (pin < 20) )
     {
-      pin = pinToPointer[pin];
+      pin = pinNumberToPointer[pin];
     }
     pinMode(pin, OUTPUT);
     servoList[this->servoIndex].Pin.nbr = pin;

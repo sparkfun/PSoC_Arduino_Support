@@ -1,8 +1,28 @@
 #include "Arduino.h"
+#include <NeoPixel.h>
 
+NeoPixel pixels(4, 0);
+
+void setup() 
+{
+  pixels.begin();
+}
+
+void loop() 
+{		
+  pixels.setPixelColor(0, 0, 0, 0);
+  pixels.show();
+  delay(1000);
+  pixels.setPixelColor(0, 255, 255, 255);
+  pixels.show();
+  delay(1000);
+}
+
+#if 0
 #include <Servo.h>
 
 Servo servoMotor0;
+/*
 Servo servoMotor1;
 Servo servoMotor2;
 Servo servoMotor3;
@@ -13,19 +33,7 @@ Servo servoMotor7;
 Servo servoMotor8;
 Servo servoMotor9;
 Servo servoMotor10;
-Servo servoMotor11;
-Servo servoMotor12;
-Servo servoMotor13;
-Servo servoMotor14;
-Servo servoMotor15;
-Servo servoMotor16;
-Servo servoMotor17;
-Servo servoMotor18;
-Servo servoMotor19;
-Servo servoMotor20;
-Servo servoMotor21;
-Servo servoMotor22;
-Servo servoMotor23;
+Servo servoMotor11;*/
 
 void setup()
 {
@@ -34,7 +42,9 @@ void setup()
   digitalWrite(D5, LOW);
   digitalWrite(D5, HIGH);
   digitalWrite(D5, LOW);
-  servoMotor0.attach(P0_D0, 700, 2300);
+  Serial1.begin(57600);
+  servoMotor0.attach(P3_D0, 700, 2200);
+  /*
   servoMotor1.attach(P0_D1, 750, 2300);
   servoMotor2.attach(P0_D2, 750, 2300);
   servoMotor3.attach(P0_D3, 750, 2300);
@@ -46,77 +56,42 @@ void setup()
   servoMotor9.attach(P3_D1, 750, 2300);
   servoMotor10.attach(P3_D2, 750, 2300);
   servoMotor11.attach(P3_D3, 750, 2300);
-  servoMotor12.attach(P3_D4, 750, 2300);
-  servoMotor13.attach(P3_D5, 750, 2300);
-  servoMotor14.attach(P3_D6, 750, 2300);
-  servoMotor15.attach(P3_D7, 750, 2300);
-  servoMotor16.attach(P5_D0, 750, 2300);
-  servoMotor17.attach(P5_D1, 750, 2300);
-  servoMotor18.attach(P5_D2, 750, 2300);
-  servoMotor19.attach(P5_D3, 750, 2300);
-  servoMotor20.attach(P5_D4, 750, 2300);
-  servoMotor21.attach(P5_D5, 750, 2300);
-  servoMotor22.attach(P5_D6, 750, 2300);
-  servoMotor23.attach(P5_D7, 750, 2300);
+  */
 }
-
+const int tickDelay = 500;
+const int stepSize = 5;
 void loop()
 {
-  servoMotor0.write(0);
-  servoMotor1.write(0);
-  servoMotor2.write(0);
-  servoMotor3.write(0);
-  servoMotor4.write(0);
-  servoMotor5.write(0);
-  servoMotor6.write(0);
-  servoMotor7.write(0);
-  servoMotor8.write(0);
-  servoMotor9.write(0);
-  servoMotor10.write(0);
-  servoMotor11.write(0);
-  servoMotor12.write(0);
-  servoMotor13.write(0);
-  servoMotor14.write(0);
-  servoMotor15.write(0);
-  servoMotor16.write(0);
-  servoMotor17.write(0);
-  servoMotor18.write(0);
-  servoMotor19.write(0);
-  servoMotor20.write(0);
-  servoMotor21.write(0);
-  servoMotor22.write(0);
-  servoMotor23.write(0);
-  delay(2000);
-  servoMotor0.write(180);
-  servoMotor1.write(180);
-  servoMotor2.write(180);
-  servoMotor3.write(180);
-  servoMotor4.write(180);
-  servoMotor5.write(180);
-  servoMotor6.write(180);
-  servoMotor7.write(180);
-  servoMotor8.write(180);
-  servoMotor9.write(180);
-  servoMotor10.write(180);
-  servoMotor11.write(180);
-  servoMotor12.write(180);
-  servoMotor13.write(180);
-  servoMotor14.write(180);
-  servoMotor15.write(180);
-  servoMotor16.write(180);
-  servoMotor17.write(180);
-  servoMotor18.write(180);
-  servoMotor19.write(180);
-  servoMotor20.write(180);
-  servoMotor21.write(180);
-  servoMotor22.write(180);
-  servoMotor23.write(180);
+  //servoMotor0.write(15);
+  //delay(2000);
+  servoMotor0.write(95);
+  //delay(2000);
+  //servoMotor0.write(175);
+  //delay(2000);
+  /*static int angle = 0;
+  static int lastTick = millis();
+  int thisTick = millis();
+  if (thisTick - tickDelay >= lastTick)
+  {
+    lastTick = thisTick;
+    servoMotor0.write(angle);
+    angle += stepSize;
+  }
+  if (Serial1.available())
+  {
+    Serial1.read();
+    Serial1.println(angle);
+  }
+  if (angle >= 180)
+  {
+    angle = 0;
+  }*/
   
-  delay(2000);
 }
+#endif
 
 #if 0
-#include <SPI.h>  // Include SPI if you're using SPI
+#include <SPI.h>
 #include <WiFi.h>
 
 void printMacAddress();
@@ -227,7 +202,11 @@ void printEncryptionType(int thisType) {
   }
 }
 #endif
+
 #if 0
+#include <SPI.h>
+#include <SFE_MicroOLED.h>
+#include <math.h>
 //////////////////////////
 // MicroOLED Definition //
 //////////////////////////
@@ -317,7 +296,9 @@ void drawCube()
   oled.display();
 }
 #endif
+
 #if 0
+#include <Wire.h>
 #include "APDS9960.h"
 
 // Pins

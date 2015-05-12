@@ -56,12 +56,12 @@ extern SPIClass SPI;
 
 // For compatibility with sketches designed for AVR @ 16 MHz
 // New programs should use SPI.beginTransaction to set the SPI clock
-#define SPI_CLOCK_DIV2	 11
-#define SPI_CLOCK_DIV4	 21
-#define SPI_CLOCK_DIV8	 42
-#define SPI_CLOCK_DIV16	 84
-#define SPI_CLOCK_DIV32	 168
-#define SPI_CLOCK_DIV64	 255
-#define SPI_CLOCK_DIV128 255
+#define SPI_CLOCK_DIV2	 3     // yields 8MHz
+#define SPI_CLOCK_DIV4	 6     // yields 4MHz
+#define SPI_CLOCK_DIV8	 12    // yields 2MHz
+#define SPI_CLOCK_DIV16	 24    // yields 1MHz
+#define SPI_CLOCK_DIV32	 48    // yields 500kHz
+#define SPI_CLOCK_DIV64	 96    // yields 250kHz
+#define SPI_CLOCK_DIV128 192   // yields 125hHz
 
 #endif

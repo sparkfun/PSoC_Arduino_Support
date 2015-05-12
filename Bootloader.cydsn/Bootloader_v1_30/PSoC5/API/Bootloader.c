@@ -56,7 +56,7 @@ const uint32 CYCODE *Bootloader_SizeBytesAccess = (const uint32 CYCODE *)(&Bootl
 ***************************************/
 static void     Bootloader_HostLink(uint32 timeout);
 static void     Bootloader_LaunchApplication(void) CYSMALL;
-static void     Bootloader_LaunchBootloadable(uint32 appAddr);
+//static void     Bootloader_LaunchBootloadable(uint32 appAddr);
 static char     BlockLoad(char mem, uint16 size, uint8* buffer, uint32 address);
 
 /*******************************************************************************
@@ -157,14 +157,15 @@ void CyBtldr_CheckLaunch(void) CYSMALL
 {  
 
 }
-
+/* This doesn't need to be here, in this incarnation. Only needed if the 
+CheckLaunch function is used to check conditions before main() begins.
 __attribute__((noinline)) // Workaround for GCC toolchain bug with inlining
 __attribute__((naked))
 static void Bootloader_LaunchBootloadable(uint32 appAddr)
 {
     __asm volatile("    BX  R0\n");
 }
-
+*/
 /*******************************************************************************
 * Function Name: Bootloader_HostLink
 ********************************************************************************

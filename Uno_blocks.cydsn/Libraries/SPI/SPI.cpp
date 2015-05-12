@@ -97,7 +97,7 @@ void SPIClass::transfer(uint8_t *_buf, size_t _count)
 {
   SPI_SS_Stretch_Write(0x00);
   uint8_t fullPackets = _count/4;
-  uint8_t strayBytes = _count%3;
+  uint8_t strayBytes = _count%4;
   uint8_t i = 0;
   while (fullPackets > 0)
   {
