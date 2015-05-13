@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: StartTransfer.h  
+* File Name: PWM_Reg_11.h  
 * Version 1.80
 *
 * Description:
@@ -14,8 +14,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_CONTROL_REG_StartTransfer_H) /* CY_CONTROL_REG_StartTransfer_H */
-#define CY_CONTROL_REG_StartTransfer_H
+#if !defined(CY_CONTROL_REG_PWM_Reg_11_H) /* CY_CONTROL_REG_PWM_Reg_11_H */
+#define CY_CONTROL_REG_PWM_Reg_11_H
 
 #include "cytypes.h"
 
@@ -29,20 +29,20 @@ typedef struct
 {
     uint8 controlState;
 
-} StartTransfer_BACKUP_STRUCT;
+} PWM_Reg_11_BACKUP_STRUCT;
 
 
 /***************************************
 *         Function Prototypes 
 ***************************************/
 
-void    StartTransfer_Write(uint8 control) ;
-uint8   StartTransfer_Read(void) ;
+void    PWM_Reg_11_Write(uint8 control) ;
+uint8   PWM_Reg_11_Read(void) ;
 
-void StartTransfer_SaveConfig(void) ;
-void StartTransfer_RestoreConfig(void) ;
-void StartTransfer_Sleep(void) ; 
-void StartTransfer_Wakeup(void) ;
+void PWM_Reg_11_SaveConfig(void) ;
+void PWM_Reg_11_RestoreConfig(void) ;
+void PWM_Reg_11_Sleep(void) ; 
+void PWM_Reg_11_Wakeup(void) ;
 
 
 /***************************************
@@ -50,10 +50,10 @@ void StartTransfer_Wakeup(void) ;
 ***************************************/
 
 /* Control Register */
-#define StartTransfer_Control        (* (reg8 *) StartTransfer_Sync_ctrl_reg__CONTROL_REG )
-#define StartTransfer_Control_PTR    (  (reg8 *) StartTransfer_Sync_ctrl_reg__CONTROL_REG )
+#define PWM_Reg_11_Control        (* (reg8 *) PWM_Reg_11_Sync_ctrl_reg__CONTROL_REG )
+#define PWM_Reg_11_Control_PTR    (  (reg8 *) PWM_Reg_11_Sync_ctrl_reg__CONTROL_REG )
 
-#endif /* End CY_CONTROL_REG_StartTransfer_H */
+#endif /* End CY_CONTROL_REG_PWM_Reg_11_H */
 
 
 /* [] END OF FILE */

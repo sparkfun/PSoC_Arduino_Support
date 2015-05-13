@@ -23,10 +23,7 @@
 #include <ADC_Mux.h>
 #include <I2C.h>
 #include <I2C_PVT.h>
-#include <PWM_2.h>
-#include <PWM_1.h>
 #include <DB_aliases.h>
-#include <PWM_3.h>
 #include <D10_Ctrl.h>
 #include <D11_Ctrl.h>
 #include <SPIM.h>
@@ -69,6 +66,13 @@
 #include <WSDriver_fonts.h>
 #include <Clock_2.h>
 #include <Bootloadable.h>
+#include <PWM_Reg_3.h>
+#include <PWM_Reg_5.h>
+#include <PWM_Reg_6.h>
+#include <PWM_Reg_9.h>
+#include <PWM_Reg_10.h>
+#include <PWM_Reg_11.h>
+#include <Clock_5.h>
 #include <ADC_IRQ.h>
 #include <ADC_theACLK.h>
 #include <USBUART_Dm_aliases.h>

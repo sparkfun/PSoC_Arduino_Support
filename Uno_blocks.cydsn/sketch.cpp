@@ -1,30 +1,31 @@
 #include "Arduino.h"
-#include <WS281x.h>
+const int ledPin = 13; // the pin that the LED is attached to
+int incomingByte;      // a variable to read incoming serial data into
 
-WS281x pixels(1, 0);
-
-void setup() 
-{
-  pixels.begin();
+void setup() {
+  // initialize serial communication:
+  Serial.begin(9600);
+  delay(5000);
+  Serial.println("Hello, world");
+  // initialize the LED pin as an output:
+  pinMode(ledPin, OUTPUT);
 }
 
-void loop() 
-{		
-  pixels.setPixelColor(0, 0, 0, 0);
-  pixels.refresh();
-  delay(1000);
-  pixels.setPixelColor(0, 255, 255, 255);
-  pixels.refresh();
-  delay(1000);
-  pixels.setPixelColor(0, 255, 0, 0);
-  pixels.refresh();
-  delay(1000);
-  pixels.setPixelColor(0, 0, 255, 0);
-  pixels.refresh();
-  delay(1000);
-  pixels.setPixelColor(0, 0, 0, 255);
-  pixels.refresh();
-  delay(1000);
+void loop() {
+  // see if there's incoming serial data:
+  if (Serial.available() > 0) 
+  {
+    // read the oldest byte in the serial buffer:
+    incomingByte = Serial.read();
+    // if it's a capital H (ASCII 72), turn on the LED:
+    if (incomingByte == 'H') {
+      digitalWrite(ledPin, HIGH);
+    }
+    // if it's an L (ASCII 76) turn off the LED:
+    if (incomingByte == 'L') {
+      digitalWrite(ledPin, LOW);
+    }
+  }
 }
 
 #if 0

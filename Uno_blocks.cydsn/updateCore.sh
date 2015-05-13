@@ -3,9 +3,11 @@
 #  project directory to some hardware directory located elsewhere on your
 #  computer (defined by the core variable).
 core=../Hardware/SparkFun/psoc/cores/arduino
+hardware_dir=../Hardware/
 sketchbook=/cygdrive/c/dropbox/Projects
 # Delete the contents of that directory.
 rm $core/* -rf 2>/dev/null
+
 
 # First, we can just straight-up copy any header files...
 #cp core/*.h $core/
@@ -51,5 +53,5 @@ find ./codegentemp -maxdepth 1 -name "*nu.s" |\
 find ./codegentemp -maxdepth 1 -name "*nu*inc" -exec cp "{}" "$core/" \;
 
 chmod -R 777 $core/../../*
-cp $core/ $sketchbook/ -r
+cp $hardware_dir/ $sketchbook/ -r
 

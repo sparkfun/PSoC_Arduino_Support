@@ -15,7 +15,7 @@
     
     #include <Project.h>
     
-    void analogWrite(uint8_t pin, uint16_t value);
+    void analogWrite(uint32_t pin, uint8_t value);
     void analogWriteInit();
     
 #endif
