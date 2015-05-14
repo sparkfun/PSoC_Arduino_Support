@@ -52,6 +52,9 @@ find ./codegentemp -maxdepth 1 -name "*nu.s" |\
 # Finally, there's are a couple of .inc files that are needed during linking. 
 find ./codegentemp -maxdepth 1 -name "*nu*inc" -exec cp "{}" "$core/" \;
 
+# Last of all, grab the hex file and throw it into the core.
+cp ./CortexM3/ARM_GCC_484/Release/Uno_blocks.hex $hardware_dir/SparkFun/psoc/Bootloader.hex  
+
 chmod -R 777 $core/../../*
 cp $hardware_dir/ $sketchbook/ -r
 

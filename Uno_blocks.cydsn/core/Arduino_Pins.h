@@ -33,6 +33,8 @@
 #define A3 D17 
 #define A4 D18 
 #define A5 D19
+  
+#define P1_D2 UserButton_0
 
 
 #define HIGH 1u
