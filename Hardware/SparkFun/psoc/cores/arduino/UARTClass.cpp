@@ -59,45 +59,42 @@ void UARTClass::end( void )
   }
 }
 
-
 int UARTClass::available( void )
 {
-  if (_appBuffSize > 0)
-  {
-    return _appBuffSize;
-  }
-  return _myHelpers->bufferSize();
+  buffer();
+  return _appBuffSize;
 }
 
 int UARTClass::peek( void )
 {
-  if (_appBuffSize == 0)
+  buffer();
+  if (_appBuffSize > 0)
   {
-    _appBuffSize = _myHelpers->bufferSize();
-    if (_appBuffSize == 0)
-    {
-      return -1;
-    }
-    _myHelpers->getData(_appBuffer, _appBuffSize);
-    _appBuffIndex = 0;
+    return _appBuffer[_appBuffIndex];
   }
-  return _appBuffer[_appBuffIndex];
+  else
+  {
+    return -1;
+  }
 }
 
 int UARTClass::read( void )
 {
-  if (_appBuffSize == 0) 
+  buffer();
+  if (_appBuffSize > 0)
   {
-    _appBuffSize = _myHelpers->bufferSize();
-    if(_appBuffSize == 0)
+    int temp = _appBuffer[_appBuffIndex++];
+    if (_appBuffIndex == _appBuffSize)
     {
-      return -1;
+      _appBuffIndex = 0;
+      _appBuffSize = 0;
     }
-    _myHelpers->getData(_appBuffer, _appBuffSize);
-    _appBuffIndex = 0;
+    return temp;
   }
-  --_appBuffSize;
-  return _appBuffer[_appBuffIndex++];
+  else
+  {
+    return -1;
+  }
 }
 
 void UARTClass::flush( void )
@@ -106,6 +103,18 @@ void UARTClass::flush( void )
   {
     _myHelpers->blockForWriteComplete();
   }
+}
+
+uint8_t UARTClass::buffer(void)
+{
+  uint8_t dataBufferSize = _myHelpers->bufferSize();
+
+  if (dataBufferSize > 0)
+  {
+    _myHelpers->getData((_appBuffer+_appBuffSize), dataBufferSize);
+    _appBuffSize += dataBufferSize;
+  }
+  return dataBufferSize;
 }
 
 size_t UARTClass::write( const uint8_t uc_data )

@@ -28,7 +28,7 @@ bool enableUSBCDC()
    * provide enough time for the PC to do its thing. */  
   while(USBUART_GetConfiguration() == 0)
   {  
-    CyDelay(10);
+    CyDelay(100);
     delayCounter++;
     if (delayCounter > 20)
     {
@@ -58,17 +58,18 @@ These are for non-USB UARTs only:
 **********************************************************************/
 
 void Serial_CustomPutArray(const uint8_t* buffer, uint16_t size);
+int16_t USBUART_CustomGetCount();
 
 void USBUART_FunctionAttach()
 {
-  USBUART_Helpers.bufferSize = USBUART_GetCount;
+  USBUART_Helpers.bufferSize = USBUART_CustomGetCount;
   USBUART_Helpers.sendData = USBUART_PutData;
   USBUART_Helpers.getData = USBUART_GetData;
   USBUART_Helpers.blockForReadyToWrite = USBUART_CDCIsReady;
 }
 
 uint16_t UART_CustomGetDataArray(uint8_t* buffer, uint16_t size);
-uint16_t UART_CustomGetBufferSize(void);
+int16_t UART_CustomGetBufferSize(void);
 void     UART_CustomPutArray(const uint8_t* buffer, uint16_t size);
 bool     UART_CustomPortEnable(void);
 void     UART_CustomPortDisable(void);
@@ -108,9 +109,9 @@ uint16_t UART_CustomGetDataArray(uint8_t* buffer, uint16_t size)
   return UART_GetDataArray(buffer, size);
 }
 
-uint16_t UART_CustomGetBufferSize(void)
+int16_t UART_CustomGetBufferSize(void)
 {
-  return (uint16_t)UART_GetRxBufferSize();
+  return (int16_t)UART_GetRxBufferSize();
 }
 
 void UART_CustomPutArray(const uint8_t* buffer, uint16_t size)
@@ -151,6 +152,18 @@ uint16_t UART_GetDataArray(uint8_t* buffer, uint8_t size)
   return bytesRead;
 }
 
+
+int16_t USBUART_CustomGetCount()
+{
+  if (USBUART_DataIsReady() == 0)
+  {
+    return 0;
+  }
+  else
+  {
+    return USBUART_GetCount();
+  }
+}
 /***************************************************************************
  * WHY!?!?!
  * Why have a function which calls a seemingly identical function? It's not

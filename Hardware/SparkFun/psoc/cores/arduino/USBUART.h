@@ -111,7 +111,7 @@
 #define USBUART_ARB_ISR_REMOVE                 (0u)
 #define USBUART_DP_ISR_REMOVE                  (0u)
 #define USBUART_ENABLE_CDC_CLASS_API           (1u)
-#define USBUART_ENABLE_MIDI_API                (0u)
+#define USBUART_ENABLE_MIDI_API                (1u)
 #define USBUART_MIDI_EXT_MODE                  (0u)
 
 

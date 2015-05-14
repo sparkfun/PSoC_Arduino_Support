@@ -15,6 +15,7 @@ extern "C" {
 }
 #include <Arduino_Time.h>
 #include <Arduino.h>
+#include <UARTClass.h>
 
 static void exitToBootloader(void);
 CY_ISR_PROTO(BootloaderReset_ISR);
@@ -39,7 +40,14 @@ void delayMicroseconds(unsigned int delayus)
 
 CY_ISR(BootloaderReset_ISR)
 {
-  BootloaderResetInterrupt_ClearPending(); 
+  BootloaderResetInterrupt_ClearPending();         
+  if(USBUART_GetConfiguration() != 0u)
+  {
+    if(USBUART_DataIsReady() != 0u)
+    {   
+      Serial.buffer();
+    }  
+  }
   if (USBUART_GetDTERate() == 1200)
   {
     exitToBootloader();

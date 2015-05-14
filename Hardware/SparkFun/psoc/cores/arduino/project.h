@@ -65,7 +65,6 @@
 #include <WSDriver.h>
 #include <WSDriver_fonts.h>
 #include <Clock_2.h>
-#include <Bootloadable.h>
 #include <PWM_Reg_3.h>
 #include <PWM_Reg_5.h>
 #include <PWM_Reg_6.h>
@@ -73,6 +72,7 @@
 #include <PWM_Reg_10.h>
 #include <PWM_Reg_11.h>
 #include <Clock_5.h>
+#include <Bootloadable.h>
 #include <ADC_IRQ.h>
 #include <ADC_theACLK.h>
 #include <USBUART_Dm_aliases.h>

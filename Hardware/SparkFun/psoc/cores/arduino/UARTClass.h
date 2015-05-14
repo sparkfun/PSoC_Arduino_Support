@@ -25,7 +25,7 @@
 
 struct SerialHelperFuncs
 {
-  uint16_t (*bufferSize)(void);
+  int16_t (*bufferSize)(void);
   bool (*portEnable)(void);
   void (*portDisable)(void);
   void (*clockAdjust)(uint16_t newDivider);
@@ -48,6 +48,7 @@ class UARTClass : public HardwareSerial
     int peek(void);
     int read(void);
     void flush(void);
+    uint8_t buffer(void);
     size_t write(const uint8_t c);
     using Print::write; // pull in write(str) and write(buf, size) from Print
 

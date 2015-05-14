@@ -26,6 +26,9 @@ extern "C" {
 void setup();
 void loop();
 long map(long, long, long, long, long);
+long constrain(long, long, long);
+long min(long, long);
+long max(long, long);
 
 extern UARTClass Serial;
 extern UARTClass Serial1;
