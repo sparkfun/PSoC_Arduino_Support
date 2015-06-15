@@ -1,5 +1,12 @@
 #include <Arduino.h>
-#include <project.h>
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+  #include <project.h>
+#ifdef __cplusplus
+}
+#endif
 #include "WS281x.h"
 
 WS281x::WS281x(uint8_t nLEDs, uint8_t pin, COLOR_ORDER order,

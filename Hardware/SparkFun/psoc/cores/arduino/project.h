@@ -79,10 +79,6 @@
 #include <USBUART_Dm.h>
 #include <USBUART_Dp_aliases.h>
 #include <USBUART_Dp.h>
-#include <WSDriver_Clock.h>
-#include <WSDriver_StringSel.h>
-#include <WSDriver_fisr.h>
-#include <WSDriver_cisr.h>
 #include <core_cm3_psoc5.h>
 #include <core_cm3.h>
 #include <CyDmac.h>
