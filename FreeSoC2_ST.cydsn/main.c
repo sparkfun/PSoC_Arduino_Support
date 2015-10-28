@@ -25,8 +25,7 @@ uint8 net_2_OFF_val = 0;
 uint8 ST_result = 0;
 
 int main()
-{
-   
+{   
     en_1 = 0;
     en_2 = 1;
     net_1_ON_val = 0;
