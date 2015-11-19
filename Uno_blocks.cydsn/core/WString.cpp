@@ -71,7 +71,7 @@ String::String(unsigned char value, unsigned char base)
 {
 	init();
 	char buf[1 + 8 * sizeof(unsigned char)];
-	utoa(value, buf, base);
+	utoa((long unsigned int)value, buf, (int)base);
 	*this = buf;
 }
 
