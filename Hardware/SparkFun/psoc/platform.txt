@@ -57,8 +57,7 @@ recipe.S.o.pattern="{compiler.path}{compiler.S.cmd}" {compiler.S.flags} {include
 recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{build.path}/{archive_file}" "{object_file}"
 
 ## Combine gc-sections, archives, and objects
-recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" -Wl,--start-group -o "{build.path}/{build.project_name}.elf" {object_files} "{build.variant.path}/Uno_blocks.a" "{build.variant.path}/{build.variant_system_lib}" "{build.path}/core.a"  -mthumb -march=armv7-m -mfix-cortex-m3-ldrd -lm "-Wl,-Map,{build.path}/{build.project_name}.map" "-T{runtime.hardware.path}/psoc/cores/arduino/cm3gcc.ld" -g "-u _printf_float" ""  -Wl,--gc-sections -Wl,--end-group -lstdc++
-
+recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" -Wl,--start-group -o "{build.path}/{build.project_name}.elf" {object_files} "{build.variant.path}/Uno_blocks.a" "{build.variant.path}/{build.variant_system_lib}" "{build.path}/core/core.a"  -mthumb -march=armv7-m -mfix-cortex-m3-ldrd -lm "-Wl,-Map,{build.path}/{build.project_name}.map" "-T{runtime.hardware.path}/psoc/cores/arduino/cm3gcc.ld" -g "-u _printf_float" ""  -Wl,--gc-sections -Wl,--end-group -lstdc++ 
 recipe.objcopy.eep.pattern=
 
 ## Create hex

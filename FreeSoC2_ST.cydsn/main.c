@@ -16,6 +16,16 @@
 #include <cypins.h>
 #include <stdio.h>
 
+// Needed to allow the ST firmware to respond to requests from Arduino to reset
+//  into the bootloader.
+static void exitToBootloader(void);
+CY_ISR_PROTO(BootloaderReset_ISR);
+
+#define Bootloader_SCHEDULE_BTLDR   (0x40u)
+#define Bootloader_SCHEDULE_BTLDB   (0x80u)
+#define Bootloader_RESET_SR0_REG    (* (reg8 *) CYREG_RESET_SR0)
+#define Bootloader_SET_RUN_TYPE(x)  (Bootloader_RESET_SR0_REG = (x))
+
 uint8 en_1 = 0;
 uint8 en_2 = 1;
 uint8 net_1_ON_val = 0;
@@ -26,6 +36,10 @@ uint8 ST_result = 0;
 
 int main()
 {   
+    CyGlobalIntEnable; 
+    BootloaderResetTimer_Start();
+    BootloaderResetInterrupt_StartEx(BootloaderReset_ISR);
+    Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDB);
     en_1 = 0;
     en_2 = 1;
     net_1_ON_val = 0;
@@ -351,4 +365,22 @@ int main()
         //CyDelay(1500);
      for(;;)
     {}
+}
+
+CY_ISR(BootloaderReset_ISR)
+{
+  BootloaderResetInterrupt_ClearPending();         
+  if(USBUART_GetConfiguration() != 0u)
+  { 
+  }
+  if (USBUART_GetDTERate() == 1200)
+  {
+    exitToBootloader();
+  }
+}
+
+void exitToBootloader(void)
+{
+  Bootloader_SET_RUN_TYPE(Bootloader_SCHEDULE_BTLDR);
+  CySoftwareReset();
 }
