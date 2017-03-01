@@ -32,7 +32,6 @@ cp main.cpp $core/
 cp Libraries/SPI $core/../../libraries/ -r
 cp Libraries/Wire $core/../../libraries/ -r
 cp Libraries/Servo $core/../../libraries/ -r
-cp Libraries/WS281x $core/../../libraries/ -r
 
 # These are the generated files that PSoC Creator normally builds with. We
 #  need header files, c files (*not* cpp!) and the linker (ld) file.
@@ -40,7 +39,7 @@ cp ./codegentemp/*.h $core/
 cp ./codegentemp/Cm3Start.c $core/
 cp ./codegentemp/*.ld $core/
 
-cp ./CortexM3/ARM_GCC_484/Release/Uno_blocks.a $core/../../variants/standard/
+cp ./CortexM3/ARM_GCC_493/Release/Uno_blocks.a $core/../../variants/standard/
 
 # There are some assembly (.s) files that need to be copied over. Arduino
 #  looks for .S (uppercase), and that case sensitivity is hard-coded in the

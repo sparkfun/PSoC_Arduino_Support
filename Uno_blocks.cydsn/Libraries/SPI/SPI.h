@@ -20,9 +20,9 @@
 
 enum SPI_MODE {
   SPI_MODE0 = 0,
-  SPI_MODE1,
-  SPI_MODE2,
-  SPI_MODE3
+  SPI_MODE1 = 1,
+  SPI_MODE2 = 2,
+  SPI_MODE3 = 3
 };
 
 enum BITORDER {
@@ -30,8 +30,44 @@ enum BITORDER {
   LSB_FIRST
 };
 
+class SPISettings {
+public:
+  SPISettings(uint32_t clock, uint8_t bitOrder, uint8_t dataMode) 
+  {
+    _clock = clock;
+    _dataMode = dataMode;
+    init_AlwaysInline(clock, bitOrder, dataMode);
+  }
+  SPISettings() 
+  {
+    _clock = 4000000;
+    _dataMode = SPI_MODE0;
+    init_AlwaysInline(4000000, MSBFIRST, SPI_MODE0);
+  }
+  
+private:
+  uint32_t _clock;
+  uint8_t _dataMode;
+  void init_AlwaysInline(uint32_t clock, uint8_t bitOrder, uint8_t dataMode)
+    __attribute__((__always_inline__)) 
+  {
+    // As of this writing (July 2016) it's not possible to configure the bit
+    //  order at runtime (at least, not easily), so we ignore it and leave it as
+    //  MSB first.
+    //  SPI_MODE_REG_Write(dataMode);
+    // The SPI clock frequency is set by a divider, from a nominal of 12MHz. We
+    //  just let the division find the closest integer value; it'll be equal to,
+    //  or lower than, the desired clock frequency.
+    SPI_Clock_In_SetDividerValue(12000000/clock);
+  }
+  friend class SPIClass;
+};
+
 class SPIClass 
 {
+  private:
+    static uint8_t inTransactionFlag;
+  
   public:
 	SPIClass();
   ~SPIClass();
@@ -47,10 +83,29 @@ class SPIClass
 	void setBitOrder(enum BITORDER _order);
 	void setDataMode(enum SPI_MODE spiMode);
 	void setClockDivider(uint8_t);
-
-  private:
   
+  inline static void beginTransaction(SPISettings settings)
+  {
+    if (inTransactionFlag)
+    {
+      return;
+    }
+    inTransactionFlag = 1;
+    // Cringe. Because of the way this was written originally, adhering to the
+    //  same structure means de-encapsulation of SPISettings. I don't like it
+    //  either, but here we are.
+    settings.init_AlwaysInline(settings._clock, 0, settings._dataMode);
+  }
+  
+  inline static void endTransaction( void )
+  {
+    inTransactionFlag = 0;
+  }
+
 };
+
+
+
 
 extern SPIClass SPI;
 

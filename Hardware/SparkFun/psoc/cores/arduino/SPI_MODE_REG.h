@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: SPI_MODE_REG.h  
+* File Name: SPI_Mode_Reg.h  
 * Version 1.80
 *
 * Description:
@@ -14,8 +14,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_CONTROL_REG_SPI_MODE_REG_H) /* CY_CONTROL_REG_SPI_MODE_REG_H */
-#define CY_CONTROL_REG_SPI_MODE_REG_H
+#if !defined(CY_CONTROL_REG_SPI_Mode_Reg_H) /* CY_CONTROL_REG_SPI_Mode_Reg_H */
+#define CY_CONTROL_REG_SPI_Mode_Reg_H
 
 #include "cytypes.h"
 
@@ -29,20 +29,20 @@ typedef struct
 {
     uint8 controlState;
 
-} SPI_MODE_REG_BACKUP_STRUCT;
+} SPI_Mode_Reg_BACKUP_STRUCT;
 
 
 /***************************************
 *         Function Prototypes 
 ***************************************/
 
-void    SPI_MODE_REG_Write(uint8 control) ;
-uint8   SPI_MODE_REG_Read(void) ;
+void    SPI_Mode_Reg_Write(uint8 control) ;
+uint8   SPI_Mode_Reg_Read(void) ;
 
-void SPI_MODE_REG_SaveConfig(void) ;
-void SPI_MODE_REG_RestoreConfig(void) ;
-void SPI_MODE_REG_Sleep(void) ; 
-void SPI_MODE_REG_Wakeup(void) ;
+void SPI_Mode_Reg_SaveConfig(void) ;
+void SPI_Mode_Reg_RestoreConfig(void) ;
+void SPI_Mode_Reg_Sleep(void) ; 
+void SPI_Mode_Reg_Wakeup(void) ;
 
 
 /***************************************
@@ -50,10 +50,10 @@ void SPI_MODE_REG_Wakeup(void) ;
 ***************************************/
 
 /* Control Register */
-#define SPI_MODE_REG_Control        (* (reg8 *) SPI_MODE_REG_Sync_ctrl_reg__CONTROL_REG )
-#define SPI_MODE_REG_Control_PTR    (  (reg8 *) SPI_MODE_REG_Sync_ctrl_reg__CONTROL_REG )
+#define SPI_Mode_Reg_Control        (* (reg8 *) SPI_Mode_Reg_Sync_ctrl_reg__CONTROL_REG )
+#define SPI_Mode_Reg_Control_PTR    (  (reg8 *) SPI_Mode_Reg_Sync_ctrl_reg__CONTROL_REG )
 
-#endif /* End CY_CONTROL_REG_SPI_MODE_REG_H */
+#endif /* End CY_CONTROL_REG_SPI_Mode_Reg_H */
 
 
 /* [] END OF FILE */

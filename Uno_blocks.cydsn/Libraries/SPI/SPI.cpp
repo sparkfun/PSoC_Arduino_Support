@@ -11,13 +11,17 @@
 
 #include "Arduino.h"
 #include "SPI.h"
+#include <project.h>
 
 SPIClass SPI;
 
+uint8_t SPIClass::inTransactionFlag;
 
 SPIClass::SPIClass()
 {
-	SPIM_Start();
+	SPIM_0_Start();
+	SPIM_1_Start();
+  inTransactionFlag = 0;
 }
 
 SPIClass::~SPIClass()
@@ -32,11 +36,12 @@ void SPIClass::begin()
   //  peripheral bus up to them.
   D10_Ctrl_Write(0x01);
   D11_Ctrl_Write(0x01);
-  pinMode(10, PERIPHERAL_OUT);
+  pinMode(10, OUTPUT);
+  digitalWrite(10, HIGH);
   pinMode(11, PERIPHERAL_OUT);
   pinMode(12, PERIPHERAL_IN);
   pinMode(13, PERIPHERAL_OUT);
-  SPI_MODE_REG_Write(0x00);
+  SPI_Mode_Reg_Write(0x00);
 }
 
 void SPIClass::end()
@@ -67,7 +72,7 @@ void SPIClass::setDataMode(SPI_MODE spiMode)
   //  These changes are controlled by the SPI_MODE_REG register; writing the
   //  MODE value (0, 1, 2, 3) to that register will configure the logic for
   //  the signal properly.
-  SPI_MODE_REG_Write(spiMode);
+  SPI_Mode_Reg_Write(spiMode);
 }
 
 void SPIClass::setClockDivider(uint8_t _divider) 
@@ -87,40 +92,63 @@ void SPIClass::setClockDivider(uint8_t _divider)
 
 uint8_t SPIClass::transfer(uint8_t _data) 
 {
-  SPIM_WriteTxData(_data);
-  while (SPIM_GetTxBufferSize() > 0)
-  { /* wait for data to be sent */}
-  return SPIM_ReadRxData(); 
+  digitalWrite(10, LOW);
+  uint8_t temp = 0;
+  if ((SPI_Mode_Reg_Read() & 0x02) == 0)
+  {
+    while (SPIM_0_GetTxBufferSize() > 0)
+    { /* wait for data to be sent */}
+    SPIM_0_WriteTxData(_data);
+    while (SPIM_0_GetTxBufferSize() > 0)
+    { /* wait for data to be sent */}
+    temp = SPIM_0_ReadRxData(); 
+  }
+  else
+  {
+    while (SPIM_1_GetTxBufferSize() > 0)
+    { /* wait for data to be sent */}
+    SPIM_1_WriteTxData(_data);
+    while (SPIM_1_GetTxBufferSize() > 0)
+    { /* wait for data to be sent */}
+    temp = SPIM_1_ReadRxData();
+  }
+  digitalWrite(10, HIGH);
+  return temp;
 }
 
 void SPIClass::transfer(uint8_t *_buf, size_t _count)
 {
-  SPI_SS_Stretch_Write(0x00);
-  uint8_t fullPackets = _count/4;
-  uint8_t strayBytes = _count%4;
-  uint8_t i = 0;
-  while (fullPackets > 0)
+  digitalWrite(10, LOW);
+  if ((SPI_Mode_Reg_Read() & 0x02) == 0)
   {
-    SPIM_PutArray((const uint8_t*)(_buf + i), 4);
-    while (SPIM_GetTxBufferSize() > 0)
+    while ((SPIM_0_ReadTxStatus() & SPIM_0_STS_SPI_DONE) == 0)
     { /* wait for data to be sent */ }
-    for (int j = 0; j<4; j++)
+    for (size_t i = 0; i < _count; i++)
     {
-      *(_buf + i + j) = SPIM_ReadRxData();
+      SPIM_0_WriteTxData(*(_buf + i));
     }
-    ++i;
-    --fullPackets;
-  }
-  if (strayBytes > 0)
-  {
-    SPIM_PutArray((const uint8_t*)(_buf + i), strayBytes);
-    while (SPIM_GetTxBufferSize() > 0)
+    while ((SPIM_0_ReadTxStatus() & SPIM_0_STS_SPI_DONE) == 0)
     { /* wait for data to be sent */ }
-    for (int j = 0; j<strayBytes; j++)
+    for (unsigned int j = 0; j<_count; j++)
     {
-      *(_buf + i + j) = SPIM_ReadRxData();
+      *(_buf + j) = SPIM_0_ReadRxData();
     }
   }
-  SPI_SS_Stretch_Write(0x01);
+  else
+  {
+    while ((SPIM_1_ReadTxStatus() & SPIM_1_STS_SPI_DONE) == 0)
+    { /* wait for data to be sent */ }
+    for (size_t i = 0; i < _count; i++)
+    {
+      SPIM_1_WriteTxData(*(_buf + i));
+    }
+    while ((SPIM_1_ReadTxStatus() & SPIM_1_STS_SPI_DONE) == 0)
+    { /* wait for data to be sent */ }      
+    for (unsigned int j = 0; j<_count; j++)
+    {
+      *(_buf + j) = SPIM_1_ReadRxData();
+    }
+  }
+  digitalWrite(10, HIGH);
 }
 

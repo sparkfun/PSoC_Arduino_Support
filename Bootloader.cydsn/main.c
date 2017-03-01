@@ -89,7 +89,11 @@ void CyBtldrCommReset(void)
 cystatus CyBtldrCommWrite(uint8* buffer, uint16 size, uint16* count, uint8 timeOut)
 {
   cystatus retVal = CYRET_TIMEOUT;
-  
+  uint16 counter;
+  if (count == NULL)
+  {
+    count = &counter;
+  }
   *count = 0;
   uint16 internalTimeout = (timeOut*10) + 100;
   uint8 packetsSent = 0;
@@ -149,6 +153,11 @@ cystatus CyBtldrCommWrite(uint8* buffer, uint16 size, uint16* count, uint8 timeO
 cystatus CyBtldrCommRead (uint8* buffer, uint16 size, uint16* count, uint8 timeOut)
 {
   cystatus retVal = CYRET_TIMEOUT;
+  uint16 counter;
+  if (count == NULL)
+  {
+    count = &counter;
+  }
   if (timeOut) timeOut = 0;
   
   *count = 0;

@@ -1,10 +1,7 @@
 #ifndef _arduino_i2c_h
 #define _arduino_i2c_h
   
-extern "C"
-{
-  #include "Project.h"
-}
+#include "Project.h"
 #include "Stream.h"
   
 enum XFER_MODE {COMPLETE, REPEATED_START, NO_STOP};

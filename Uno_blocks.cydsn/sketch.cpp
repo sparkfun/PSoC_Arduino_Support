@@ -1,4 +1,20 @@
 #include "Arduino.h"
+#include <SPI.h>
+
+void setup()
+{
+}
+
+void loop()
+{
+}
+
+
+
+#if 0
+//------------------------------------------------------------------------------
+// Test sketch: set LED high or low based on receiving H or L over USB serial
+//  connection.
 const int ledPin = 13; // the pin that the LED is attached to
 int incomingByte;      // a variable to read incoming serial data into
 
@@ -28,7 +44,6 @@ void loop() {
   }
 }
 
-#if 0
 #include <Servo.h>
 
 Servo servoMotor0;
