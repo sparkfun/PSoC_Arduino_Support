@@ -78,7 +78,7 @@ extern char* ltoa( long value, char *string, int radix )
   return string;
 }
 
-extern char* _utoa( unsigned long value, char *string, int radix )
+extern char* utoa( unsigned long value, char *string, int radix )
 {
   return ultoa( (unsigned long)value, string, (int)radix ) ;
 }

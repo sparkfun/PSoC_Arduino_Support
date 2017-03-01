@@ -1,6 +1,5 @@
 #ifndef __arduino_h_
 #define __arduino_h_
-  
 
 extern "C" {
 #include <project.h>
@@ -15,11 +14,13 @@ extern "C" {
 #include "Arduino_Time.h"
 #include "Arduino_Tone.h"
 #include "Arduino_Serial.h"
-#include "Wstring.h"
 #include "UARTClass.h"
 #include "Stream.h"
 #include "avr/pgmspace.h"
+#include "avr/dtostrf.h"
 #include "Arduino_Extended_IO.h"
+#include "itoa.h"
+#include "Wstring.h"
 #include <math.h>
 #include <pins_arduino.h>
 
@@ -43,6 +44,7 @@ extern UARTClass Serial1;
 #define Bootloader_RESET_SR0_REG    (* (reg8 *) CYREG_RESET_SR0)
 #define Bootloader_SET_RUN_TYPE(x)  (Bootloader_RESET_SR0_REG = (x))
 
+#include "WCharacter.h"
 #endif
 /* [] END OF FILE */
 

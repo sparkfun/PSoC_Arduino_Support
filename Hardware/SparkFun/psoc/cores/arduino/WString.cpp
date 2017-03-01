@@ -20,9 +20,8 @@
 */
 
 #include "WString.h"
+#include "avr/dtostrf.h"
 #include "itoa.h"
-#include <avr/dtostrf.h>
-#include <stdlib.h>
 
 /*********************************************/
 /*  Constructors                             */
@@ -46,7 +45,7 @@ String::String(const __FlashStringHelper *pstr)
 	*this = pstr;
 }
 
-#ifdef __GXX_EXPERIMENTAL_CXX0X__
+#if __cplusplus >= 201103L || defined(__GXX_EXPERIMENTAL_CXX0X__)
 String::String(String &&rval)
 {
 	init();
@@ -72,7 +71,7 @@ String::String(unsigned char value, unsigned char base)
 {
 	init();
 	char buf[1 + 8 * sizeof(unsigned char)];
-	_utoa((long unsigned int)value, buf, (int)base);
+	utoa(value, buf, base);
 	*this = buf;
 }
 
@@ -88,7 +87,7 @@ String::String(unsigned int value, unsigned char base)
 {
 	init();
 	char buf[1 + 8 * sizeof(unsigned int)];
-	_utoa(value, buf, base);
+	utoa(value, buf, base);
 	*this = buf;
 }
 
@@ -192,11 +191,11 @@ String & String::copy(const __FlashStringHelper *pstr, unsigned int length)
 	return *this;
 }
 
-#ifdef __GXX_EXPERIMENTAL_CXX0X__
+#if __cplusplus >= 201103L || defined(__GXX_EXPERIMENTAL_CXX0X__)
 void String::move(String &rhs)
 {
 	if (buffer) {
-		if (capacity >= rhs.len) {
+		if (rhs && capacity >= rhs.len) {
 			strcpy(buffer, rhs.buffer);
 			len = rhs.len;
 			rhs.len = 0;
@@ -224,7 +223,7 @@ String & String::operator = (const String &rhs)
 	return *this;
 }
 
-#ifdef __GXX_EXPERIMENTAL_CXX0X__
+#if __cplusplus >= 201103L || defined(__GXX_EXPERIMENTAL_CXX0X__)
 String & String::operator = (String &&rval)
 {
 	if (this != &rval) move(rval);
@@ -305,7 +304,7 @@ unsigned char String::concat(int num)
 unsigned char String::concat(unsigned int num)
 {
 	char buf[1 + 3 * sizeof(unsigned int)];
-	_utoa(num, buf, 10);
+	utoa(num, buf, 10);
 	return concat(buf, strlen(buf));
 }
 
@@ -743,6 +742,11 @@ long String::toInt(void) const
 
 float String::toFloat(void) const
 {
-	if (buffer) return float(atof(buffer));
+	return float(toDouble());
+}
+
+double String::toDouble(void) const
+{
+	if (buffer) return atof(buffer);
 	return 0;
 }
