@@ -22,7 +22,8 @@ extern "C" {
 #include "itoa.h"
 #include "Wstring.h"
 #include <math.h>
-#include <pins_arduino.h>
+#include "WMath.h"
+#include "pins_arduino.h"
 
 void setup();
 void loop();
@@ -43,7 +44,7 @@ extern UARTClass Serial1;
 #define Bootloader_SCHEDULE_BTLDB   (0x80u)
 #define Bootloader_RESET_SR0_REG    (* (reg8 *) CYREG_RESET_SR0)
 #define Bootloader_SET_RUN_TYPE(x)  (Bootloader_RESET_SR0_REG = (x))
-
+#define digitalPinToPort(P) ( pgm_read_byte( digital_pin_to_port_PGM + (P) ) )
 #include "WCharacter.h"
 #endif
 /* [] END OF FILE */

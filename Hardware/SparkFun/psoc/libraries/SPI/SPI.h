@@ -16,7 +16,7 @@
 #include "Arduino.h"
 
 #define SPI_HAS_TRANSACTION 0
-#define SPI_HAS_EXTENDED_CS_PIN_HANDLING 0
+//#define SPI_HAS_EXTENDED_CS_PIN_HANDLING 0
 
 enum SPI_MODE {
   SPI_MODE0 = 0,
