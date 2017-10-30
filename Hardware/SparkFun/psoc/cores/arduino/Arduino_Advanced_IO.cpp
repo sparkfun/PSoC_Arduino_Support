@@ -4,7 +4,7 @@ extern "C" {
 
 #include <stdint.h>
 #include "Arduino_Advanced_IO.h"
-#include <Arduino.h>
+#include "Arduino.h"
 #include "Arduino_Time.h"
 
 uint32_t pulseIn(uint8_t pin, uint8_t level, uint32_t timeout)
